@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Werkcollege Week 2: Bedrijfskundig Denken</title>
+    <meta
+      name="apple-mobile-web-app-capable"
+      content="yes"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css"
+      id="theme"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+
+    <style>
+      :root {
+        --r-main-font: "Inter", sans-serif;
+        --r-heading-font: "Inter", sans-serif;
+        --r-main-color: #212529;
+        --r-heading-color: #083d77;
+        --r-link-color: #083d77;
+      }
+
+      @keyframes animatedBackground {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 20px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      .reveal {
+        font-size: 32px;
+        font-weight: 300;
+      }
+      .reveal .slides {
+        background: linear-gradient(315deg, #e0f7fa, #f8f9fa, #e3f2fd);
+        background-size: 400% 400%;
+        animation: animatedBackground 30s ease infinite;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        font-weight: 600;
+        color: var(--r-heading-color);
+      }
+      .reveal h1 {
+        font-size: 3em;
+        font-weight: 700;
+      }
+      .reveal h2 {
+        font-size: 2.2em;
+      }
+
+      .reveal .box {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        padding: 25px 35px;
+        text-align: left;
+        margin: 25px auto;
+        width: 85%;
+      }
+
+      .reveal img {
+        max-height: 500px;
+        border: none;
+        box-shadow: none;
+        background: none;
+      }
+      .reveal .qr-code {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        display: inline-block;
+      }
+
+      .icon-grid {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 40px;
+      }
+      .icon-item {
+        text-align: center;
+        width: 200px;
+      }
+      .icon-item svg {
+        width: 80px;
+        height: 80px;
+        color: var(--r-heading-color);
+        margin-bottom: 15px;
+      }
+      .icon-item p {
+        margin: 0;
+        font-size: 0.8em;
+        font-weight: 600;
+      }
+
+      .reveal .quote {
+        font-style: italic;
+        font-size: 1.2em;
+        max-width: 80%;
+        margin: 40px auto;
+      }
+      .reveal .keyword {
+        font-size: 2.5em;
+        font-weight: 700;
+        color: var(--r-heading-color);
+      }
+
+      /* --- Stijlen voor de Timer --- */
+      .timer-container {
+        /* position: absolute; is verwijderd */
+        margin-top: 40px; /* Ruimte boven de timer */
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 10;
+        display: inline-block; /* Zorgt dat de container niet de hele breedte pakt */
+      }
+      .timer-display {
+        font-size: 1.5em;
+        font-weight: 600;
+        color: var(--r-heading-color);
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .timer-controls button,
+      .timer-controls input {
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        padding: 8px 15px;
+        margin: 0 3px;
+        border-radius: 6px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .timer-controls button {
+        background-color: var(--r-heading-color);
+        color: white;
+      }
+      .timer-controls button:hover {
+        background-color: #062c54;
+      }
+      .timer-controls input {
+        width: 60px;
+        text-align: center;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <p style="font-weight: 400">
+            Strategisch Management | Werkcollege Week 2
+          </p>
+          <h1>Bedrijfskundig Denken</h1>
+          <aside class="notes">
+            Welkomstwoord. Vandaag verkennen we het thema "Bedrijfskundig
+            Denken". We splitsen de les op in twee delen. In Deel 1 kijken we
+            naar de 'motor' van het denken zelf. In Deel 2 zetten we de
+            'bedrijfskundige bril' op en passen we dit denken toe op ons
+            vakgebied.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Agenda</h2>
+          <div class="icon-grid">
+            <div class="icon-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588 3 3 0 1 0 5.997-.125 4 4 0 0 0 2.526-5.77 4 4 0 0 0-.556-6.588Z"
+                />
+                <path
+                  d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588 3 3 0 1 1-5.997-.125 4 4 0 0 1-2.526-5.77 4 4 0 0 1 .556-6.588Z"
+                />
+                <path d="M14 13h.01" />
+                <path d="M10 13h.01" />
+                <path d="M12 8h.01" />
+                <path d="M12 16h.01" />
+              </svg>
+              <p>Deel 1:<br />De Motor van het Denken</p>
+            </div>
+            <div class="icon-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-glasses-icon lucide-glasses"
+              >
+                <circle
+                  cx="6"
+                  cy="15"
+                  r="4"
+                />
+                <circle
+                  cx="18"
+                  cy="15"
+                  r="4"
+                />
+                <path d="M14 15a2 2 0 0 0-2-2 2 2 0 0 0-2 2" />
+                <path d="M2.5 13 5 7c.7-1.3 1.4-2 3-2" />
+                <path d="M21.5 13 19 7c-.7-1.3-1.5-2-3-2" />
+              </svg>
+              <p>Deel 2:<br />De Lens van de Bedrijfskundige</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Korte toelichting op de agenda voor de komende 90 minuten.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Deel 1: De "Motor" van het Denken</h2>
+          <aside class="notes">Start van het eerste blok van de les.</aside>
+        </section>
+
+        <section>
+          <h3 class="keyword">Bloom's Taxonomy</h3>
+          <img
+            src="bloom.jpg"
+            alt="Bloom's Taxonomy"
+            style="max-height: 550px"
+          />
+          <aside class="notes">
+            Toon de afbeelding. Leg de focus op de cruciale verschuiving van de
+            onderste laag, `Remember` (reproductie, het niveau van de toets),
+            naar de hogere lagen `Analyze` en `Evaluate` (het niveau van de
+            hbo-professional).
+          </aside>
+        </section>
+
+        <section>
+          <p class="quote">
+            "We trainen hier voor het vak, niet alleen voor de toets."
+          </p>
+          <aside class="notes">
+            Maak de 'onderwijskundige spagaat' expliciet. "Het is belangrijk om
+            hier eerlijk over te zijn. De toets zal jullie vragen om deze
+            concepten te **onthouden**. In dit werkcollege oefenen we met het
+            **toepassen en analyseren** ervan. Dat is wat je als professional
+            nodig hebt. We trainen hier dus voor het vak, niet alleen voor de
+            toets."
+          </aside>
+        </section>
+
+        <section>
+          <h3 class="keyword">Wat is 'Strategie'?</h3>
+          <p style="margin-top: 30px">(2 minuten)</p>
+          <aside class="notes">
+            Geef studenten twee minuten de tijd. Vraag daarna 3-4 studenten hun
+            definitie voor te lezen. Wijs op de verschillen in hun antwoorden
+            (focus op concurrentie, lange termijn, doelen, etc.). Concludeer dat
+            er niet één 'juist' antwoord is, wat de noodzaak voor
+            hoger-orde-denken direct aantoont.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Systeem 1 vs Systeem 2</h3>
+          <img
+            src="system1-2-thinking.avif"
+            alt="Wiskundige oplossing"
+          />
+          <aside class="notes">
+            Introduceer het concept van Systeem 1 en Systeem 2. Geef simpele
+            voorbeelden zoals 'wat is 2+2?' (Systeem 1) versus 'wat is 17x24?'
+            (Systeem 2).
+          </aside>
+        </section>
+
+        <section>
+          <h3>Een raadsel...</h3>
+          <div class="box">
+            <p>
+              Een knuppel en een bal kosten samen €1,10.<br />De knuppel kost
+              €1,- meer dan de bal.
+            </p>
+            <h3 style="margin-top: 20px">Hoeveel kost de bal?</h3>
+          </div>
+          <aside class="notes">
+            Stel de klassieke vraag. Wacht op de intuïtieve (en foute)
+            antwoorden die Systeem 1 geeft, zoals "10 cent". Dit creëert een
+            'teachable moment'.
+          </aside>
+        </section>
+
+        <section>
+          <img
+            src="ball-bat.jpg"
+            alt="Wiskundige oplossing"
+          />
+          <h3 style="margin-top: 20px">
+            De bal kost
+            <span
+              class="fragment"
+              style="color: tomato"
+              >€0,05</span
+            >
+          </h3>
+          <aside class="notes">
+            Onthul het juiste antwoord en werk de wiskundige oplossing op het
+            bord uit. Leg uit dat Systeem 1 het snelle, foute antwoord geeft,
+            terwijl Systeem 2 de structuur van de vergelijkingen nodig heeft om
+            tot de juiste conclusie te komen. Dit toont de valkuil van intuïtie.
+          </aside>
+        </section>
+
+        <section>
+          <p class="quote">
+            Complexe vraagstukken vereisen de bewuste activatie van je
+            <strong>Systeem 2-denken</strong>.
+          </p>
+          <aside class="notes">
+            Maak de conclusie: "Voor simpele, bekende problemen is Systeem 1
+            prima. Maar de interessante bedrijfskundige vraagstukken die jullie
+            op hbo-niveau tegenkomen, zijn complex en zitten vol valkuilen.
+            Daarvoor moet je bewust je Systeem 2-denken activeren. De rest van
+            dit vak gaan we oefenen met tools die jullie helpen om dat
+            gestructureerd te doen."
+          </aside>
+        </section>
+
+        <section>
+          <h2>Deel 2: De "Lens" van de Bedrijfskundige</h2>
+          <aside class="notes">
+            Start van het tweede blok. Hier passen we de concepten over 'denken'
+            toe op het vakgebied bedrijfskunde.
+          </aside>
+        </section>
+
+        <section>
+          <h3 class="keyword">De Strategy Map</h3>
+          <img
+            src="strat-map.png"
+            alt="Strategy Map van Kaplan en Norton"
+            style="margin-top: 30px"
+          />
+          <aside class="notes">
+            Introductie van Deel 2. "Nu we weten *hoe* we moeten denken
+            (analytisch, Systeem 2), kijken we *waarmee* we dat doen. Een
+            bedrijfskundige gebruikt modellen als gereedschap. Een klassiek en
+            krachtig voorbeeld is de Strategy Map." Deel de handout uit. Leg uit
+            waarom dit een typisch bedrijfskundig model is: het biedt een
+            holistische en geïntegreerde kijk en verbindt 'zachte' activa
+            (mensen, cultuur) met 'harde' resultaten (winst) via oorzaak-gevolg
+            relaties.
+          </aside>
+        </section>
+
+        <section>
+          <h3>De Functie van Modellen</h3>
+          <div class="icon-grid">
+            <div class="icon-item fragment">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+              </svg>
+              <p>Complexiteit Reduceren</p>
+            </div>
+            <div class="icon-item fragment">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z"
+                />
+                <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
+              </svg>
+              <p>Gedeelde Taal Creëren</p>
+            </div>
+            <div class="icon-item fragment">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  width="8"
+                  height="4"
+                  x="8"
+                  y="2"
+                  rx="1"
+                  ry="1"
+                />
+                <path
+                  d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                />
+                <path d="M12 11h4" />
+                <path d="M12 16h4" />
+                <path d="M8 11h.01" />
+                <path d="M8 16h.01" />
+              </svg>
+              <p>Analyse Structureren</p>
+            </div>
+            <div class="icon-item fragment">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M18 6H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h13l4-3.5L18 6Z"
+                />
+                <path d="M12 13v8" />
+                <path d="M12 3v3" />
+              </svg>
+              <p>Strategie Vormen</p>
+            </div>
+          </div>
+          <aside class="notes">
+            "Maar wat doen al die modellen nu eigenlijk? In de kern zijn het
+            **denk- en communicatietools** die een manager helpen om een aantal
+            cruciale dingen te doen."<br /><br />1. **Complexiteit te
+            Reduceren:** Een model vereenvoudigt de realiteit tot een
+            overzichtelijk schema.<br />2. **Een Gedeelde Taal te Creëren:**
+            Iedereen begrijpt wat een 'SWOT' of 'Klantperspectief' is.<br />3.
+            **Analyse te Structureren:** Ze bieden een raamwerk om systematisch
+            te onderzoeken.<br />4. **Een Coherente Strategie te Vormen:** Ze
+            helpen een logisch verhaal te creëren over hoe de organisatie waarde
+            creëert.<br /><br />"Natuurlijk zijn er meer modellen, zoals SWOT,
+            DESTEP, Porter's Five Forces, 7S, en het 6-waarden model."
+          </aside>
+        </section>
+
+        <section>
+          <h3>Denken in Context</h3>
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://businessdatasolutions.github.io/ai-for-bms/infographic.html"
+            alt="QR Code voor de infographic"
+          />
+          <aside class="notes">
+            "Een model als de Strategy Map is echter niet tijdloos. Het denken
+            over bedrijfskunde evolueert constant mee met de wereld om ons heen.
+            Dat gaan we nu zelf onderzoeken in een Systeem 2-opdracht." Toon de
+            infographic via de QR-code.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Groepsopdracht</h3>
+          <h4 style="margin-bottom: 20px">
+            Wat waren de externe (DESTEP) drijfveren?
+          </h4>
+          <div
+            class="icon-grid"
+            style="font-size: 0.7em; gap: 20px; margin-bottom: 80px"
+          >
+            <div class="icon-item">
+              <strong>Groep 1</strong>
+              <p>BK 1.0<br />(Efficiëntie)</p>
+            </div>
+            <div class="icon-item">
+              <strong>Groep 2</strong>
+              <p>BK 2.0<br />(Menselijke Relaties)</p>
+            </div>
+            <div class="icon-item">
+              <strong>Groep 3</strong>
+              <p>BK 3.0<br />(IT & Strategie)</p>
+            </div>
+            <div class="icon-item">
+              <strong>Groep 4</strong>
+              <p>BK 4.0<br />(Digitale Transformatie)</p>
+            </div>
+          </div>
+          <div class="timer-container">
+            <div
+              id="timer-display"
+              class="timer-display"
+            >
+              12:00
+            </div>
+            <div class="timer-controls">
+              <input
+                type="number"
+                id="timer-input"
+                value="12"
+                min="1"
+              />
+              <button id="start-pause-btn">Start</button>
+              <button id="reset-btn">Reset</button>
+            </div>
+          </div>
+          <aside class="notes">
+            Leg de groepsopdracht uit. "We verdelen de klas in vier groepen.
+            Elke groep krijgt één fase uit de evolutie toegewezen. Het doel is
+            om te onderzoeken welke externe ontwikkelingen de belangrijkste
+            drijfveren waren voor het ontstaan van jullie tijdperk. Gebruik de
+            DESTEP-analyse en zoek naar de 1-2 belangrijkste ontwikkelingen per
+            factor." Geef de hints mee (Industriële Revolutie, vakbonden, PC,
+            internet). Start de timer.
+            <br /><br />
+            <strong>Uitwerking ter inspiratie:</strong>
+            <a
+              href="https://businessdatasolutions.github.io/ai-for-bms/evolution-destep.html"
+              >https://businessdatasolutions.github.io/ai-for-bms/evolution-destep.html</a
+            >
+          </aside>
+        </section>
+
+        <section>
+          <h3>Reflectie & Synthese</h3>
+          <div class="box">
+            <p>Waar op de tijdlijn past de Strategy Map?</p>
+            <p
+              class="fragment"
+              style="margin-top: 20px"
+            >
+              Hoe 'updaten' we het model voor vandaag met
+              <strong>6 Capitals</strong> & <strong>Agile</strong>?
+            </p>
+          </div>
+          <aside class="notes">
+            Start de discussie na de presentaties. Vraag: "Op welke fase past de
+            Strategy Map?" Stuur richting BK 3.0. Bespreek de kritiekpunten:
+            focus op aandeelhouderswaarde vs. 6 Capitals, en proces-silo's vs.
+            Agile. Eindig met een open vraag over de synthese om ze aan het
+            denken te zetten. Dit is een belangrijke conclusie van de les.
+          </aside>
+        </section>
+
+        <section>
+          <p class="quote">
+            <strong>Bedrijfskundig Denken</strong><br />
+            = Systeem 2 + Modellen + Context
+          </p>
+          <aside class="notes">
+            Vat de kernboodschap van de hele les samen: "Vandaag hebben we
+            gezien dat **Bedrijfskundig Denken** de kunst is om je analytische
+            **Systeem 2** te activeren, en met **gestructureerde modellen**
+            complexe, multi-interpretabele problemen in hun **context** te
+            doorgronden, terwijl je je bewust bent dat deze modellen en je
+            denken moeten **mee-evolueren**."
+          </aside>
+        </section>
+
+        <section>
+          <h3>Feedback & Afsluiting</h3>
+          <p>Scan de QR-code</p>
+          <div class="qr-code">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://hanbedrijfskunde.github.io/retrospective/?workshop=Strategisch%20Mgmt%20WK2"
+              alt="QR Code voor de survey"
+            />
+          </div>
+          <aside class="notes">
+            Sluit de les af. Geef een korte vooruitblik naar de volgende week en
+            vraag de studenten vriendelijk om de survey in te vullen voor
+            waardevolle feedback.
+          </aside>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        center: true,
+        transition: "fade",
+        plugins: [RevealNotes],
+      });
+
+      // --- Timer Logic ---
+      const timerDisplay = document.getElementById("timer-display");
+      const timerInput = document.getElementById("timer-input");
+      const startPauseBtn = document.getElementById("start-pause-btn");
+      const resetBtn = document.getElementById("reset-btn");
+
+      let timerInterval;
+      let timeInSeconds;
+      let isRunning = false;
+      let initialMinutes = 12;
+
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${String(mins).padStart(2, "0")}:${String(secs).padStart(
+          2,
+          "0"
+        )}`;
+      }
+
+      function updateDisplay() {
+        timerDisplay.textContent = formatTime(timeInSeconds);
+      }
+
+      function playSound() {
+        Tone.start();
+        const synth = new Tone.Synth().toDestination();
+        const now = Tone.now();
+        synth.triggerAttackRelease("C5", "8n", now);
+        synth.triggerAttackRelease("G5", "8n", now + 0.2);
+      }
+
+      function startTimer() {
+        if (isRunning) return;
+        isRunning = true;
+        startPauseBtn.textContent = "Pauze";
+        timerInterval = setInterval(() => {
+          timeInSeconds--;
+          updateDisplay();
+          if (timeInSeconds <= 0) {
+            clearInterval(timerInterval);
+            isRunning = false;
+            startPauseBtn.textContent = "Start";
+            playSound();
+          }
+        }, 1000);
+      }
+
+      function pauseTimer() {
+        if (!isRunning) return;
+        isRunning = false;
+        startPauseBtn.textContent = "Start";
+        clearInterval(timerInterval);
+      }
+
+      function resetTimer() {
+        pauseTimer();
+        initialMinutes = parseInt(timerInput.value, 10) || 12;
+        timeInSeconds = initialMinutes * 60;
+        updateDisplay();
+      }
+
+      startPauseBtn.addEventListener("click", () => {
+        if (isRunning) {
+          pauseTimer();
+        } else {
+          startTimer();
+        }
+      });
+      resetBtn.addEventListener("click", resetTimer);
+      resetTimer();
+    </script>
+  </body>
+</html>

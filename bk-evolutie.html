@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Evolutie van de Bedrijfskundige Professional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #111827; /* Tailwind gray-900 */
+        color: #f3f4f6; /* Tailwind gray-100 */
+        overflow-x: hidden;
+      }
+
+      .timeline-container {
+        position: relative;
+        padding: 50px 0;
+      }
+
+      .timeline-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          #3b82f6,
+          #8b5cf6,
+          #ec4899
+        ); /* Blue to Purple to Pink gradient */
+        z-index: 0;
+        animation: drawLine 5s ease-out forwards;
+      }
+
+      @keyframes drawLine {
+        from {
+          height: 0;
+        }
+        to {
+          height: 100%;
+        }
+      }
+
+      .timeline-wrapper {
+        position: relative;
+        margin-bottom: 80px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      .timeline-wrapper.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-item {
+        position: relative;
+        width: calc(50% - 30px);
+        max-width: 600px;
+        z-index: 1;
+      }
+
+      .timeline-wrapper:nth-child(odd) .timeline-item {
+        margin-left: 0;
+        margin-right: auto;
+        text-align: right;
+      }
+
+      .timeline-wrapper:nth-child(even) .timeline-item {
+        margin-left: auto;
+        margin-right: 0;
+        text-align: left;
+      }
+
+      /* DESTEP Frame Styles */
+      .destep-frame {
+        background-color: #1f2937;
+        border: 1px solid #374151;
+        padding: 20px;
+        border-radius: 12px;
+        position: absolute;
+        top: 0;
+        width: calc(50% - 30px);
+        max-width: 600px;
+        z-index: 1;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
+      }
+
+      .timeline-wrapper.visible .destep-frame {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Place DESTEP on the RIGHT for ODD items */
+      .timeline-wrapper:nth-child(odd) .destep-frame {
+        left: calc(50% + 30px);
+        text-align: left;
+      }
+
+      /* Place DESTEP on the LEFT for EVEN items */
+      .timeline-wrapper:nth-child(even) .destep-frame {
+        right: calc(50% + 30px);
+        text-align: right;
+      }
+
+      .destep-title {
+        font-weight: 700;
+        font-size: 1rem;
+        color: #9ca3af;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+      }
+
+      .timeline-wrapper:nth-child(even) .destep-frame .destep-title {
+        justify-content: flex-end;
+      }
+
+      .destep-title svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+
+      .timeline-wrapper:nth-child(even) .destep-frame .destep-title svg {
+        margin-right: 0;
+        margin-left: 8px;
+      }
+
+      .destep-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .destep-list li {
+        font-size: 0.85rem;
+        color: #d1d5db;
+        margin-bottom: 8px;
+        display: flex;
+      }
+
+      .timeline-wrapper:nth-child(even) .destep-frame .destep-list li {
+        justify-content: flex-end;
+      }
+
+      .destep-list li .label {
+        font-weight: 700; /* Bolder */
+        color: #c4b5fd; /* Tailwind violet-300 */
+        text-shadow: 0 0 4px rgba(196, 181, 253, 0.4); /* Subtle glow */
+        min-width: 15px;
+        margin-right: 8px;
+      }
+
+      .timeline-wrapper:nth-child(even) .destep-frame .destep-list li .label {
+        margin-right: 0;
+        margin-left: 8px;
+      }
+      /* End DESTEP Frame Styles */
+
+      /* Small screens: stack items */
+      @media (max-width: 900px) {
+        .timeline-container::before {
+          left: 20px;
+        }
+        .timeline-wrapper {
+          margin-left: 50px;
+          margin-bottom: 20px;
+        }
+        .timeline-item,
+        .destep-frame {
+          width: 100%;
+          position: static;
+          margin: 0 !important;
+          text-align: left !important;
+        }
+        .destep-frame {
+          margin-top: 20px;
+          margin-bottom: 60px;
+          opacity: 1; /* Ensure visible on mobile */
+          transform: none;
+        }
+        .timeline-wrapper:nth-child(even) .destep-frame,
+        .timeline-wrapper:nth-child(even) .destep-frame .destep-title,
+        .timeline-wrapper:nth-child(even) .destep-frame .destep-list li {
+          text-align: left !important;
+          justify-content: flex-start;
+        }
+        .timeline-wrapper:nth-child(even) .destep-frame .destep-title svg {
+          margin-left: 0;
+          margin-right: 8px;
+        }
+        .timeline-wrapper:nth-child(even) .destep-frame .destep-list li .label {
+          margin-left: 0;
+          margin-right: 8px;
+        }
+        .timeline-item:nth-child(odd) .timeline-content::after,
+        .timeline-item:nth-child(even) .timeline-content::after,
+        .timeline-wrapper:nth-child(odd)
+          .timeline-item
+          .timeline-content::after,
+        .timeline-wrapper:nth-child(even)
+          .timeline-item
+          .timeline-content::after {
+          left: -19px;
+          border-width: 10px 20px 10px 0;
+          border-color: transparent #1f2937 transparent transparent;
+        }
+      }
+
+      .timeline-dot {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #111827;
+        border: 4px solid #ec4899;
+        z-index: 2;
+        box-shadow: 0 0 15px #ec4899, 0 0 30px #ec4899;
+        transform: translateX(-50%);
+      }
+
+      @media (max-width: 900px) {
+        .timeline-dot {
+          left: -34px !important;
+          transform: none;
+        }
+      }
+
+      .timeline-content {
+        background-color: #1f2937;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+          0 0 15px rgba(139, 92, 246, 0.2);
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .timeline-content:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+          0 0 25px rgba(139, 92, 246, 0.4);
+      }
+
+      .timeline-content::after {
+        content: "";
+        position: absolute;
+        top: 22px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+      }
+
+      .timeline-wrapper:nth-child(odd) .timeline-item .timeline-content::after {
+        right: -19px;
+        border-width: 10px 0 10px 20px;
+        border-color: transparent transparent transparent #1f2937;
+      }
+
+      .timeline-wrapper:nth-child(even)
+        .timeline-item
+        .timeline-content::after {
+        left: -19px;
+        border-width: 10px 20px 10px 0;
+        border-color: transparent #1f2937 transparent transparent;
+      }
+
+      .bk-version-title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        margin-bottom: 0.75rem;
+      }
+      .bk-version-subtitle {
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: #9ca3af;
+        margin-bottom: 1.25rem;
+      }
+      .bk-keywords span {
+        background-color: #374151;
+        color: #d1d5db;
+        padding: 0.3rem 0.7rem;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      .bk-keywords span:hover {
+        background-color: #4b5563;
+        transform: scale(1.08);
+      }
+      .bk-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1rem;
+        filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.6));
+        color: #f3f4f6;
+      }
+      .timeline-wrapper:nth-child(odd) .bk-icon {
+        float: right;
+        margin-left: 1rem;
+      }
+      .timeline-wrapper:nth-child(even) .bk-icon {
+        float: left;
+        margin-right: 1rem;
+      }
+
+      @media (max-width: 900px) {
+        .bk-icon {
+          float: none !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          display: block;
+          margin: 0 auto 1rem auto;
+        }
+      }
+
+      #bk1 .bk-version-title {
+        color: #60a5fa;
+      }
+      #bk2 .bk-version-title {
+        color: #34d399;
+      }
+      #bk3 .bk-version-title {
+        color: #fbbf24;
+      }
+      #bk4 .bk-version-title {
+        color: #f472b6;
+      }
+      #bk5 .bk-version-title {
+        color: #a78bfa;
+      }
+
+      #bk5 .timeline-content {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+          0 0 30px rgba(167, 139, 250, 0.7), 0 0 50px rgba(167, 139, 250, 0.5);
+      }
+      #bk5 .timeline-dot {
+        border-color: #a78bfa;
+        box-shadow: 0 0 15px #a78bfa, 0 0 30px #a78bfa;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        50% {
+          transform: translateX(-50%) scale(1.1);
+          box-shadow: 0 0 25px #a78bfa, 0 0 50px #a78bfa;
+        }
+      }
+      @media (max-width: 900px) {
+        @keyframes pulse {
+          50% {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #a78bfa, 0 0 50px #a78bfa;
+          }
+        }
+      }
+
+      .header-glow {
+        text-shadow: 0 0 10px #a78bfa, 0 0 20px #a78bfa, 0 0 30px #a78bfa,
+          0 0 40px #a78bfa;
+      }
+      .header-glow .text-violet-400 {
+        color: #ddd6fe;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5),
+          0 0 8px rgba(167, 139, 250, 0.7), 0 0 15px rgba(236, 72, 153, 0.4),
+          0 0 20px #a78bfa, 0 0 30px #a78bfa, 0 0 40px #a78bfa;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="text-center py-12 md:py-16">
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight header-glow">
+        De Evolutie van de
+        <span class="text-violet-400">Bedrijfskundige</span> Professional
+      </h1>
+      <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+        Een reis door de tijd: van efficiëntie-expert tot strategisch
+        AI-integrator.
+      </p>
+    </header>
+
+    <div class="timeline-container">
+      <div
+        class="timeline-wrapper"
+        id="bk1-wrapper"
+      >
+        <div
+          id="bk1"
+          class="timeline-dot"
+        ></div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <svg
+              class="bk-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <title>BK 1.0: Efficiëntie</title>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
+              />
+            </svg>
+            <h2 class="bk-version-title">BK 1.0</h2>
+            <h3 class="bk-version-subtitle">
+              Efficiëntie & Management (Begin 20e eeuw - '50)
+            </h3>
+            <p class="text-gray-300 mb-4 text-sm md:text-base">
+              Focus op standaardisatie, productieoptimalisatie en hiërarchische
+              structuren. Scientific Management als leidraad.
+            </p>
+            <div class="bk-keywords">
+              <span>Scientific Management</span> <span>Standaardisatie</span>
+              <span>Productie</span> <span>Hiërarchie</span>
+            </div>
+          </div>
+        </div>
+        <div class="destep-frame">
+          <h4 class="destep-title">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+              />
+            </svg>
+            Externe Ontwikkelingen
+          </h4>
+          <ul class="destep-list">
+            <li>
+              <span class="label">D:</span>Bevolkingsgroei en urbanisatie (trek
+              naar de stad).
+            </li>
+            <li>
+              <span class="label">E:</span>Industriële revoluties, opkomst
+              massaproductie.
+            </li>
+            <li>
+              <span class="label">S:</span>Verzuiling, opkomst
+              arbeidersbewegingen.
+            </li>
+            <li>
+              <span class="label">T:</span>Elektrificatie, lopende band,
+              telefoon.
+            </li>
+            <li>
+              <span class="label">E:</span>Beginnend bewustzijn milieu-impact
+              industrie.
+            </li>
+            <li>
+              <span class="label">P:</span>Twee wereldoorlogen, opbouw
+              natiestaten.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="timeline-wrapper"
+        id="bk2-wrapper"
+      >
+        <div
+          id="bk2"
+          class="timeline-dot"
+        ></div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <svg
+              class="bk-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <title>BK 2.0: Mens & Organisatie</title>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+              />
+            </svg>
+            <h2 class="bk-version-title">BK 2.0</h2>
+            <h3 class="bk-version-subtitle">
+              Menselijke Relaties & Organisatie ('50 - '70)
+            </h3>
+            <p class="text-gray-300 mb-4 text-sm md:text-base">
+              Aandacht verschuift naar motivatie, groepsdynamica en de sociale
+              aspecten van werk. De menselijke factor wordt centraal.
+            </p>
+            <div class="bk-keywords">
+              <span>Human Relations</span> <span>Motivatie</span>
+              <span>Groepsdynamica</span> <span>Organisatiestructuur</span>
+            </div>
+          </div>
+        </div>
+        <div class="destep-frame">
+          <h4 class="destep-title">
+            Externe Ontwikkelingen
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+              />
+            </svg>
+          </h4>
+          <ul class="destep-list">
+            <li>
+              <span class="label">D:</span>Babyboom, start van de vergrijzing.
+            </li>
+            <li>
+              <span class="label">E:</span>Wederopbouw, economische groei,
+              consumptiemaatschappij.
+            </li>
+            <li>
+              <span class="label">S:</span>Ontzuiling, protestgeneratie ('68),
+              emancipatie.
+            </li>
+            <li>
+              <span class="label">T:</span>Opkomst televisie, transistorradio,
+              begin ruimtevaart.
+            </li>
+            <li>
+              <span class="label">E:</span>Grenzen aan de groei (Rapport van de
+              Club van Rome).
+            </li>
+            <li>
+              <span class="label">P:</span>Koude Oorlog, dekolonisatie, begin
+              Europese integratie.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="timeline-wrapper"
+        id="bk3-wrapper"
+      >
+        <div
+          id="bk3"
+          class="timeline-dot"
+        ></div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <svg
+              class="bk-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <title>BK 3.0: IT & Strategie</title>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"
+              />
+            </svg>
+            <h2 class="bk-version-title">BK 3.0</h2>
+            <h3 class="bk-version-subtitle">IT & Strategie ('80 - '90)</h3>
+            <p class="text-gray-300 mb-4 text-sm md:text-base">
+              Opkomst van informatietechnologie als strategische enabler. Focus
+              op concurrentievoordeel en beginnende globalisering.
+            </p>
+            <div class="bk-keywords">
+              <span>Informatietechnologie</span> <span>Strategie</span>
+              <span>Concurrentievoordeel</span> <span>Globalisering</span>
+            </div>
+          </div>
+        </div>
+        <div class="destep-frame">
+          <h4 class="destep-title">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+              />
+            </svg>
+            Externe Ontwikkelingen
+          </h4>
+          <ul class="destep-list">
+            <li>
+              <span class="label">D:</span>Toenemende culturele diversiteit.
+            </li>
+            <li>
+              <span class="label">E:</span>Oliecrises, neoliberalisme,
+              globalisering van markten.
+            </li>
+            <li>
+              <span class="label">S:</span>Individualisme, opkomst van
+              yuppie-cultuur.
+            </li>
+            <li>
+              <span class="label">T:</span>Introductie PC, start van het
+              internet (ARPANET).
+            </li>
+            <li>
+              <span class="label">E:</span>Zure regen, gat in de ozonlaag,
+              opkomst milieubeweging.
+            </li>
+            <li>
+              <span class="label">P:</span>Val Berlijnse Muur, einde Koude
+              Oorlog, Verdrag van Maastricht.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="timeline-wrapper"
+        id="bk4-wrapper"
+      >
+        <div
+          id="bk4"
+          class="timeline-dot"
+        ></div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <svg
+              class="bk-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <title>BK 4.0: Digitaal & Data</title>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"
+              />
+            </svg>
+            <h2 class="bk-version-title">BK 4.0</h2>
+            <h3 class="bk-version-subtitle">
+              Digitale Transformatie & Data (2000 - Heden)
+            </h3>
+            <p class="text-gray-300 mb-4 text-sm md:text-base">
+              Volledige integratie van digitalisering en data. Wendbaarheid,
+              klantgerichtheid en het verbinden van mensen en processen in
+              transitie staan centraal.
+            </p>
+            <div class="bk-keywords">
+              <span>Digitalisering</span> <span>Big Data</span>
+              <span>Agile</span> <span>Klantgerichtheid</span>
+              <span>Transitie</span>
+            </div>
+          </div>
+        </div>
+        <div class="destep-frame">
+          <h4 class="destep-title">
+            Externe Ontwikkelingen
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+              />
+            </svg>
+          </h4>
+          <ul class="destep-list">
+            <li>
+              <span class="label">D:</span>Verdere vergrijzing en ontgroening,
+              superdiversiteit.
+            </li>
+            <li>
+              <span class="label">E:</span>Dot-com bubble, kredietcrisis (2008),
+              platformeconomie.
+            </li>
+            <li>
+              <span class="label">S:</span>Opkomst sociale media, 24/7-economie,
+              roep om zingeving.
+            </li>
+            <li>
+              <span class="label">T:</span>Doorbraak internet, mobiel, cloud,
+              big data.
+            </li>
+            <li>
+              <span class="label">E:</span>Groeiend bewustzijn
+              klimaatverandering, energietransitie.
+            </li>
+            <li>
+              <span class="label">P:</span>Terrorisme (9/11), Brexit,
+              geopolitieke spanningen.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="timeline-wrapper"
+        id="bk5-wrapper"
+      >
+        <div
+          id="bk5"
+          class="timeline-dot"
+        ></div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <svg
+              class="bk-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <title>BK 5.0: AI & Duurzaamheid</title>
+              <g
+                transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                fill="currentColor"
+                stroke="none"
+              >
+                <path
+                  d="M2410 5105 c-308 -62 -598 -318 -814 -717 l-47 -87 -172 0 c-336 -1 -614 -74 -795 -208 -17 -13 -37 -21 -42 -18 -5 3 -35 10 -66 15 -180 29 -354 -98 -383 -281 -18 -111 18 -217 100 -298 48 -47 49 -50 49 -107 0 -211 102 -510 260 -766 l49 -78 -49 -78 c-158 -256 -260 -555 -260 -767 0 -59 -1 -62 -46 -104 -27 -26 -58 -69 -76 -108 -28 -59 -30 -70 -26 -151 3 -68 10 -98 30 -137 52 -101 142 -167 253 -185 51 -8 140 0 165 15 4 2 38 -15 75 -40 126 -83 317 -148 515 -176 47 -6 160 -12 253 -13 l167 -1 53 -95 c191 -345 427 -576 683 -669 449 -164 899 79 1228 664 l56 99 167 2 c93 0 206 6 253 13 198 28 388 93 514 176 60 39 70 43 94 33 15 -6 59 -11 97 -11 94 0 176 35 243 107 69 73 95 146 90 251 -5 96 -28 147 -98 220 l-48 50 -5 95 c-14 226 -99 470 -250 718 l-56 92 56 93 c151 247 235 490 250 717 l6 95 45 45 c68 67 103 151 103 242 0 41 -6 92 -15 117 -35 96 -122 180 -221 212 -48 15 -159 16 -198 0 -24 -9 -35 -6 -102 39 -184 120 -438 181 -756 181 l-167 0 -60 107 c-297 527 -695 779 -1102 697z m256 -166 c150 -27 300 -116 439 -261 96 -98 179 -210 239 -319 20 -36 36 -68 36 -71 0 -4 -19 -9 -42 -13 -204 -31 -479 -100 -675 -170 l-103 -37 -102 37 c-197 70 -471 139 -676 170 -35 6 -42 10 -37 23 15 42 94 169 153 248 226 300 502 442 768 393z m-1199 -822 c-78 -203 -159 -492 -196 -697 l-19 -105 -64 -55 c-116 -101 -349 -334 -441 -443 l-91 -108 -34 53 c-87 134 -167 345 -196 517 -23 135 -26 126 50 140 37 7 83 20 103 31 98 50 173 156 186 264 8 62 -14 160 -47 214 -21 34 -21 35 -2 50 62 47 258 115 399 136 124 19 359 21 352 3z m2555 -7 c63 -10 158 -35 212 -54 98 -35 190 -82 184 -94 -54 -103 -62 -129 -62 -207 0 -65 4 -90 26 -136 51 -112 137 -177 261 -200 77 -14 74 -5 51 -140 -29 -170 -108 -379 -196 -517 l-34 -53 -91 108 c-91 107 -321 339 -441 443 l-63 55 -33 166 c-40 197 -82 350 -142 516 -24 67 -44 124 -44 127 0 15 265 5 372 -14z m-2261 -5 c180 -27 549 -117 549 -134 0 -3 -67 -39 -148 -78 -197 -97 -366 -194 -546 -314 -82 -55 -151 -97 -154 -95 -6 7 32 161 75 305 31 104 114 331 120 331 2 0 48 -7 104 -15z m1744 -87 c63 -168 155 -483 155 -535 0 -7 -30 9 -67 36 -168 121 -435 278 -655 384 -71 33 -128 64 -128 68 0 21 506 138 640 148 11 1 28 -31 55 -101z m-2980 -124 c68 -44 91 -155 47 -226 -91 -147 -312 -85 -312 88 0 133 152 212 265 138z m4264 -2 c66 -49 92 -143 56 -211 -48 -94 -168 -123 -254 -61 -90 63 -86 215 7 276 55 36 139 35 191 -4z m-2131 -48 c295 -122 681 -344 953 -550 l96 -73 12 -93 c43 -343 43 -793 0 -1136 l-12 -93 -96 -73 c-126 -95 -277 -196 -428 -285 -131 -77 -496 -258 -578 -287 l-50 -17 -100 42 c-320 137 -673 341 -946 547 l-96 73 -12 93 c-44 362 -44 774 0 1136 l11 92 67 52 c94 74 316 223 451 303 194 114 583 303 628 305 7 0 52 -16 100 -36z m-1442 -831 c-15 -90 -24 -467 -15 -660 4 -115 11 -225 15 -245 3 -21 2 -38 -4 -38 -28 0 -447 459 -447 490 0 31 419 490 447 490 6 0 7 -17 4 -37z m2845 -110 c80 -82 180 -192 223 -245 l78 -98 -78 -97 c-86 -108 -369 -401 -378 -392 -3 3 -1 54 4 115 10 112 14 622 6 691 -12 95 -16 173 -8 173 5 0 74 -66 153 -147z m-3314 -600 c91 -108 322 -340 441 -443 l63 -55 34 -170 c37 -184 95 -392 150 -540 19 -51 35 -96 35 -99 0 -12 -246 -6 -348 10 -150 22 -341 86 -406 136 -19 15 -19 16 2 50 33 54 55 152 47 214 -8 70 -56 163 -105 208 -54 48 -105 73 -184 87 -76 14 -73 5 -50 140 29 170 93 345 181 492 26 42 48 77 48 77 1 0 42 -48 92 -107z m3823 -78 c52 -106 104 -268 124 -384 23 -135 26 -126 -51 -140 -124 -23 -210 -88 -261 -200 -21 -45 -26 -71 -27 -136 0 -69 4 -88 30 -140 17 -33 31 -63 33 -66 6 -14 -107 -69 -209 -103 -57 -19 -152 -42 -210 -50 -103 -16 -349 -22 -349 -10 0 3 16 48 35 99 54 146 112 353 150 539 l34 171 63 55 c120 104 350 335 441 443 l91 108 34 -53 c18 -29 51 -89 72 -133z m-2825 -767 c134 -84 358 -205 483 -263 45 -21 82 -41 82 -45 0 -9 -182 -60 -335 -95 -107 -24 -316 -58 -320 -53 -8 9 -97 256 -118 328 -28 93 -77 288 -77 307 0 7 37 -14 83 -46 45 -32 136 -92 202 -133z m1900 105 c-27 -124 -83 -308 -132 -438 -25 -66 -47 -121 -48 -123 -4 -4 -203 27 -303 49 -129 27 -352 90 -352 98 0 4 62 37 138 74 75 36 198 101 272 143 138 78 414 257 426 275 15 25 15 -6 -1 -78z m-3128 -55 c78 -47 102 -158 51 -235 -60 -90 -192 -101 -264 -21 -34 37 -44 63 -44 115 0 132 142 210 257 141z m4215 22 c77 -22 128 -87 128 -165 0 -95 -71 -167 -165 -167 -115 0 -194 103 -165 213 14 50 65 104 113 118 43 12 46 12 89 1z m-2081 -511 c185 -68 502 -148 682 -174 26 -3 47 -9 47 -12 0 -14 -76 -144 -128 -218 -71 -100 -208 -244 -288 -301 -164 -117 -342 -164 -510 -133 -238 43 -494 257 -662 552 -62 108 -61 104 -5 112 174 24 533 117 693 179 36 13 70 25 76 25 5 1 48 -13 95 -30z"
+                />
+                <path
+                  d="M2083 3133 c-24 -22 -80 -147 -247 -550 -119 -286 -216 -530 -216 -541 0 -30 40 -71 75 -78 53 -10 77 21 146 186 l63 150 229 0 228 0 23 -52 c12 -29 42 -99 66 -156 34 -83 48 -106 72 -118 56 -29 118 8 118 70 0 38 -421 1060 -448 1088 -10 10 -31 20 -48 24 -26 5 -37 1 -61 -23z m131 -476 c40 -97 71 -179 68 -182 -7 -7 -302 -7 -302 1 0 6 139 344 147 357 3 5 7 7 9 5 2 -3 37 -84 78 -181z"
+                />
+                <path
+                  d="M2783 3150 c-35 -14 -56 -55 -49 -94 10 -53 27 -60 145 -66 l106 -5 0 -425 0 -425 -107 -5 c-120 -6 -135 -13 -144 -71 -5 -29 -1 -41 19 -65 l25 -29 285 -3 284 -3 32 26 c40 34 43 84 6 120 -22 23 -31 25 -125 25 l-100 0 0 430 0 430 100 0 c94 0 103 2 125 25 37 36 34 86 -6 119 l-31 26 -271 -1 c-150 0 -282 -4 -294 -9z"
+                />
+              </g>
+            </svg>
+            <h2 class="bk-version-title">BK 5.0</h2>
+            <h3 class="bk-version-subtitle">
+              AI, Duurzaamheid & Ethiek (Nabije Toekomst)
+            </h3>
+            <p class="text-gray-300 mb-4 text-sm md:text-base">
+              De strategische integrator in het tijdperk van (Agentic) AI. Focus
+              op duurzame waardecreatie, ethisch leiderschap en Human-AI
+              collaboratie in een hyper-transitie omgeving.
+            </p>
+            <div class="bk-keywords">
+              <span>AI</span> <span>Agentic AI</span> <span>Duurzaamheid</span>
+              <span>Ethiek</span> <span>Brede Welvaart</span>
+              <span>Human-AI Collab</span>
+            </div>
+          </div>
+        </div>
+        <div class="destep-frame">
+          <h4 class="destep-title">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+              />
+            </svg>
+            Externe Ontwikkelingen
+          </h4>
+          <ul class="destep-list">
+            <li>
+              <span class="label">D:</span>Krimpende beroepsbevolking, 'dubbele'
+              vergrijzing.
+            </li>
+            <li>
+              <span class="label">E:</span>Circulaire economie, focus op brede
+              welvaart i.p.v. BBP.
+            </li>
+            <li>
+              <span class="label">S:</span>Polarisatie vs. inclusiviteit, vraag
+              naar transparantie en ethiek.
+            </li>
+            <li>
+              <span class="label">T:</span>Doorbraak Generatieve AI, quantum
+              computing.
+            </li>
+            <li>
+              <span class="label">E:</span>Implementatie klimaatdoelen, focus op
+              biodiversiteit.
+            </li>
+            <li>
+              <span class="label">P:</span>Strengere regulering (EU AI Act),
+              geopolitieke machtsverschuivingen.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center py-10">
+      <p class="text-gray-500 text-sm">
+        Infographic gecreëerd met passie & AI.
+      </p>
+    </footer>
+
+    <script>
+      // Simple scroll animation for timeline items
+      const timelineItems = document.querySelectorAll(".timeline-wrapper");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target); // Optional: stop observing once visible
+            }
+          });
+        },
+        {
+          threshold: 0.1, // Trigger when 10% of the item is visible
+        }
+      );
+
+      timelineItems.forEach((item) => {
+        observer.observe(item);
+      });
+    </script>
+  </body>
+</html>
