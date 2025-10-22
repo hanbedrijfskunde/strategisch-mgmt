@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Figure 1 & Value Difference Chart (Perfectly Aligned)</title>
+		<script
+			src="https://cdn.plot.ly/plotly-3.1.0.min.js"
+			charset="utf-8"
+		></script>
+		<style>
+			body {
+				font-family: sans-serif;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				margin: 0;
+				padding: 20px 0;
+				background-color: #f9f9f9;
+				gap: 30px;
+			}
+			.chart-container {
+				width: 90vw;
+				max-width: 800px;
+				height: 48vh;
+				max-height: 520px;
+				background-color: white;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="chart" class="chart-container"></div>
+		<div id="diffChart" class="chart-container"></div>
+
+		<script>
+			// --- Parameters from the paper's model ---
+			const x0 = 0.5; // The point of known knowledge
+			const q = 0.35; // The uncertainty threshold for routine workers (must be < 0.5)
+			const eta = 3; // The cost parameter for genius workers (must be <= 4)
+
+			// --- Generate data points for the x-axis (Knowledge Domain) ---
+			const x_values = [];
+			for (let i = 0; i <= 1; i += 0.01) {
+				x_values.push(i);
+			}
+
+			// --- Calculate y-values for each worker type based on the formulas ---
+			const vr_values = x_values.map((x) => {
+				const distance = Math.abs(x - x0);
+				return distance <= q ? 1 - distance / q : 0;
+			});
+
+			const vg_values = x_values.map((x) => {
+				return 1 - eta * Math.pow(x - x0, 2);
+			});
+
+			// --- Define the Plotly traces for the first chart ---
+			const trace_vr = {
+				x: x_values,
+				y: vr_values,
+				mode: "lines",
+				name: "V_R(x) - Routine Worker",
+				line: { color: "rgb(55, 128, 191)", width: 3 },
+			};
+
+			const trace_vg = {
+				x: x_values,
+				y: vg_values,
+				mode: "lines",
+				name: "V_G(x) - Genius Worker",
+				line: { color: "rgb(219, 64, 82)", width: 3, dash: "dash" },
+			};
+
+			// --- Define common layout properties for alignment ---
+			const common_margin = { l: 80, r: 50, b: 100, t: 80, pad: 4 };
+			const common_xaxis_config = {
+				domain: [0.1, 0.95], // Explicitly set the plotting domain for the x-axis
+				range: [0, 1],
+				tickvals: [0, x0 - q, x0, x0 + q, 1],
+				ticktext: [
+					"0",
+					`x₀-q=${(x0 - q).toFixed(2)}`,
+					`x₀=${x0}`,
+					`x₀+q=${x0 + q}`,
+					"1",
+				],
+			};
+
+			// --- Define the layout of the first chart ---
+			const layout = {
+				title:
+					"<b>Figure 1: Decision-Making Value for Routine and Genius Workers</b>",
+				margin: common_margin,
+				xaxis: {
+					...common_xaxis_config,
+					title: "Knowledge Domain (x)",
+				},
+				yaxis: { title: "Value V(x)", range: [0, 1.1] },
+				legend: {
+					orientation: "h", // Horizontal legend
+					yanchor: "top",
+					y: -0.2, // Position below the x-axis
+					xanchor: "center",
+					x: 0.5,
+				},
+				annotations: [
+					{
+						text: "<b>Region 1 (Genius)</b>",
+						x: (x0 - q) / 2,
+						y: 1.05,
+						showarrow: false,
+					},
+					{
+						text: "<b>Region 2 (Routine)</b>",
+						x: x0,
+						y: 1.05,
+						showarrow: false,
+					},
+					{
+						text: "<b>Region 3 (Genius)</b>",
+						x: 1 - (x0 - q) / 2,
+						y: 1.05,
+						showarrow: false,
+					},
+				],
+				shapes: [
+					{
+						type: "line",
+						x0: x0 - q,
+						y0: 0,
+						x1: x0 - q,
+						y1: 1,
+						line: { color: "grey", width: 1, dash: "dot" },
+					},
+					{
+						type: "line",
+						x0: x0 + q,
+						y0: 0,
+						x1: x0 + q,
+						y1: 1,
+						line: { color: "grey", width: 1, dash: "dot" },
+					},
+				],
+			};
+
+			// --- Render the first plot ---
+			Plotly.newPlot("chart", [trace_vr, trace_vg], layout, {
+				responsive: true,
+			});
+
+			// --- LOGIC FOR THE SECOND (DIFFERENCE) CHART ---
+			const difference_values = x_values.map((val, index) => {
+				return vg_values[index] - vr_values[index];
+			});
+
+			const trace_diff = {
+				x: x_values,
+				y: difference_values,
+				mode: "lines",
+				name: "Difference",
+				line: { color: "rgb(76, 175, 80)", width: 3 },
+				fill: "tozeroy",
+				fillcolor: "rgba(76, 175, 80, 0.2)",
+			};
+
+			const layout_diff = {
+				title: "<b>Value Difference (V_G - V_R)</b>",
+				margin: common_margin,
+				xaxis: {
+					...common_xaxis_config,
+					title: "Knowledge Domain (x)",
+				},
+				yaxis: { title: "Value Advantage" },
+				shapes: [
+					{
+						type: "line",
+						x0: 0,
+						y0: 0,
+						x1: 1,
+						y1: 0,
+						line: { color: "black", width: 2, dash: "solid" },
+					},
+					{
+						type: "line",
+						x0: x0 - q,
+						y0: "paper",
+						y1: "paper",
+						yref: "paper",
+						line: { color: "grey", width: 1, dash: "dot" },
+					},
+					{
+						type: "line",
+						x0: x0 + q,
+						y0: "paper",
+						y1: "paper",
+						yref: "paper",
+						line: { color: "grey", width: 1, dash: "dot" },
+					},
+				],
+				annotations: [],
+				showlegend: false,
+			};
+
+			// --- Render the second (difference) plot ---
+			Plotly.newPlot("diffChart", [trace_diff], layout_diff, {
+				responsive: true,
+			});
+		</script>
+	</body>
+</html>

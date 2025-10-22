@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Werkcollege Week 6: AI en de Toekomst van het Bedrijfskundig Beroep</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" id="theme" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --r-main-font: "Inter", sans-serif;
+        --r-heading-font: "Inter", sans-serif;
+        --r-main-color: #212529;
+        --r-heading-color: #083d77;
+        --r-link-color: #083d77;
+        --poll-option-a: #4caf50;
+        --poll-option-b: #2196f3;
+        --poll-option-c: #ff9800;
+        --poll-option-d: #9c27b0;
+      }
+
+      @keyframes animatedBackground {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 20px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      @keyframes growBar {
+        from { width: 0%; }
+      }
+
+      .reveal {
+        font-size: 32px;
+        font-weight: 300;
+      }
+
+      .reveal .slides {
+        background: linear-gradient(315deg, #e0f7fa, #f8f9fa, #e3f2fd);
+        background-size: 400% 400%;
+        animation: animatedBackground 30s ease infinite;
+      }
+
+      .reveal .slides section {
+        height: 100%;
+        padding: 30px 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+        font-weight: 600;
+        color: var(--r-heading-color);
+      }
+
+      .reveal h1 {
+        font-size: 1.5em;
+        font-weight: 700;
+        margin-bottom: 0.4em;
+      }
+
+      .reveal h2 {
+        font-size: 1.2em;
+        margin-bottom: 0.3em;
+      }
+
+      .reveal h3 {
+        font-size: 1.1em;
+        margin-bottom: 0.3em;
+      }
+
+      .reveal .box {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        padding: 25px 35px;
+        text-align: left;
+        margin: 25px auto;
+        width: 85%;
+      }
+
+      .reveal img {
+        max-height: 500px;
+        border: none;
+        box-shadow: none;
+        background: none;
+      }
+
+      .reveal .qr-code {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        display: inline-block;
+      }
+
+      .reveal .quote {
+        font-style: italic;
+        font-size: 1.2em;
+        max-width: 80%;
+        margin: 40px auto;
+      }
+
+      .reveal .keyword {
+        font-size: 2.5em;
+        font-weight: 700;
+        color: var(--r-heading-color);
+      }
+
+      /* Poll Styles */
+      .poll-container {
+        margin: 0 auto;
+        max-width: 92%;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        padding: 10px 15px 12px;
+        box-shadow: 0 2px 15px rgba(31, 38, 135, 0.08);
+      }
+
+      .poll-container h2 {
+        font-size: 0.95em !important;
+        margin-bottom: 6px !important;
+      }
+
+      .poll-question {
+        font-size: 0.65em;
+        font-weight: 600;
+        color: var(--r-heading-color);
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .poll-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+        margin-bottom: 8px;
+      }
+
+      .poll-option {
+        background: white;
+        border-radius: 5px;
+        padding: 6px 8px;
+        cursor: pointer;
+        transition: border-color 0.1s ease, box-shadow 0.1s ease;
+        border: 2px solid #e0e0e0;
+      }
+
+      .poll-option:hover {
+        border-color: var(--r-heading-color);
+        box-shadow: 0 1px 4px rgba(31, 38, 135, 0.1);
+      }
+
+      .poll-option.voted {
+        border-color: var(--r-heading-color);
+        background: rgba(8, 61, 119, 0.05);
+        box-shadow: 0 0 0 1px var(--r-heading-color);
+      }
+
+      .poll-option-label {
+        font-weight: 700;
+        font-size: 0.55em;
+        display: block;
+        margin-bottom: 2px;
+        color: var(--r-heading-color);
+      }
+
+      .poll-option-text {
+        font-size: 0.46em;
+        line-height: 1.2;
+        color: #666;
+      }
+
+      .poll-results {
+        margin-top: 8px;
+      }
+
+      .poll-result-item {
+        margin-bottom: 6px;
+      }
+
+      .poll-result-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2px;
+        font-size: 0.46em;
+        font-weight: 600;
+      }
+
+      .poll-result-bar-container {
+        height: 18px;
+        background: rgba(200, 200, 200, 0.25);
+        border-radius: 9px;
+        overflow: hidden;
+      }
+
+      .poll-result-bar {
+        height: 100%;
+        border-radius: 9px;
+        transition: width 0.4s ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 5px;
+        color: white;
+        font-weight: 700;
+        font-size: 0.46em;
+        transform: translateZ(0);
+      }
+
+      .poll-result-bar.option-a { background: var(--poll-option-a); }
+      .poll-result-bar.option-b { background: var(--poll-option-b); }
+      .poll-result-bar.option-c { background: var(--poll-option-c); }
+      .poll-result-bar.option-d { background: var(--poll-option-d); }
+
+      /* Compact styling for routine poll results */
+      .routine-poll-results-compact {
+        margin-top: 5px;
+      }
+
+      .routine-poll-results-compact .poll-result-item {
+        margin-bottom: 2px;
+      }
+
+      .routine-poll-results-compact .poll-result-label {
+        font-size: 0.4em;
+        margin-bottom: 1px;
+      }
+
+      .routine-poll-results-compact .poll-result-bar-container {
+        height: 11px;
+        border-radius: 5px;
+      }
+
+      .routine-poll-results-compact .poll-result-bar {
+        font-size: 0.37em;
+        padding-right: 2px;
+      }
+
+      .poll-comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .poll-comparison-column h4 {
+        text-align: center;
+        font-size: 0.7em;
+        margin-bottom: 8px;
+        color: var(--r-heading-color);
+      }
+
+      .poll-controls {
+        margin-top: 6px;
+        text-align: center;
+      }
+
+      .poll-controls button {
+        font-family: "Inter", sans-serif;
+        font-size: 0.42em;
+        padding: 3px 8px;
+        margin: 0 3px;
+        border-radius: 4px;
+        border: 1px solid var(--r-heading-color);
+        background-color: var(--r-heading-color);
+        color: white;
+        cursor: pointer;
+        transition: background 0.1s ease;
+      }
+
+      .poll-controls button:hover {
+        background-color: #0a4d99;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .poll-comparison {
+          grid-template-columns: 1fr;
+        }
+        .reveal {
+          font-size: 24px;
+        }
+      }
+
+      /* Matrix table styling */
+      .matrix-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 0.75em;
+      }
+
+      .matrix-table th, .matrix-table td {
+        border: 2px solid var(--r-heading-color);
+        padding: 10px;
+        text-align: left;
+      }
+
+      .matrix-table th {
+        background: rgba(8, 61, 119, 0.1);
+        font-weight: 600;
+      }
+
+      /* Iframe styling */
+      .genius-iframe {
+        width: 100%;
+        height: 65vh;
+        max-height: 650px;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Slide 1: Title -->
+        <section>
+          <p style="font-weight: 400">Strategisch Management | Werkcollege Week 6</p>
+          <h1>AI en de Toekomst van het Bedrijfskundig Beroep</h1>
+          <aside class="notes">
+            Welkom bij week 6. Vandaag gaan we verkennen wat AI betekent voor jouw toekomst als bedrijfskundige.
+            We bouwen voort op wat we in week 1 hebben geleerd over bedrijfskundig denken.
+          </aside>
+        </section>
+
+        <!-- Slide 2: Terugblik Week 1 -->
+        <section>
+          <h2>Terugblik Week 1</h2>
+          <p class="quote">
+            <strong>Bedrijfskundig Denken</strong><br />
+            = Systeem 2 + Modellen + Context
+          </p>
+          <div class="fragment" style="margin-top: 40px;">
+            <p style="font-size: 0.8em;">Denk terug aan de bal-knuppel vraag. Wat was de kernles?</p>
+          </div>
+          <aside class="notes">
+            2 studenten laten antwoorden (max 1 min totaal).
+            Kernpunt: Systeem 2 denken is langzaam maar betrouwbaar, we gebruiken modellen om complexiteit te reduceren.
+          </aside>
+        </section>
+
+        <!-- Slide 3: Pre-Poll -->
+        <section id="poll-pre-slide">
+          <h2>Jouw Verwachting</h2>
+          <div class="poll-container">
+            <div class="poll-question">
+              Als ik over een paar jaar start als bedrijfskundige, dan is AI in mijn dagelijks werk...
+            </div>
+            <div class="poll-options" id="pre-poll-options">
+              <div class="poll-option" data-option="a" onclick="vote('pre', 'a')">
+                <span class="poll-option-label">A. Mijn assistent</span>
+                <span class="poll-option-text">Het neemt routine-werk over, ik focus op strategie en complexiteit</span>
+              </div>
+              <div class="poll-option" data-option="b" onclick="vote('pre', 'b')">
+                <span class="poll-option-label">B. Mijn gereedschap</span>
+                <span class="poll-option-text">Ik gebruik het actief als tool, maar bepaal zelf wat en hoe</span>
+              </div>
+              <div class="poll-option" data-option="c" onclick="vote('pre', 'c')">
+                <span class="poll-option-label">C. Mijn concurrent</span>
+                <span class="poll-option-text">Het bedreigt mijn werk, ik moet constant bijblijven om relevant te blijven</span>
+              </div>
+              <div class="poll-option" data-option="d" onclick="vote('pre', 'd')">
+                <span class="poll-option-label">D. Minimaal aanwezig</span>
+                <span class="poll-option-text">Bedrijfskundig werk vraagt vooral menselijke skills die AI niet heeft</span>
+              </div>
+            </div>
+            <div class="poll-results" id="pre-poll-results" style="display: none;">
+              <!-- Results will be injected here -->
+            </div>
+            <div class="poll-controls">
+              <button onclick="showResults('pre')">Toon Resultaten</button>
+              <button onclick="resetPoll('pre')" class="reset-button" style="background: #dc3545; border-color: #dc3545;">Reset</button>
+            </div>
+          </div>
+          <aside class="notes">
+            3 minuten. Laat studenten stemmen via hun eigen device of handopsteken.
+            Toon resultaten zonder commentaar. "Hou je keuze in gedachten - vandaag verkennen we wat dit betekent."
+          </aside>
+        </section>
+
+        <!-- Slide 4: Live AI Demo -->
+        <section>
+          <h2>Live AI Demo ⚡</h2>
+          <div class="box">
+            <h3 style="font-size: 1em; margin-bottom: 20px;">Opdracht voor ChatGPT/Claude:</h3>
+            <p style="font-style: italic; background: rgba(8, 61, 119, 0.05); padding: 15px; border-left: 4px solid var(--r-heading-color);">
+              "Maak een SWOT-analyse voor Albert Heijn in de context van online retail concurrentie"
+            </p>
+            <div style="margin-top: 30px; text-align: center;">
+              <p style="font-size: 1.2em;">⏱️ AI doet dit in: <strong>30-45 seconden</strong></p>
+              <p style="font-size: 1.2em; margin-top: 20px;">📝 Jij zou erover doen: <strong>2-4 uur</strong></p>
+            </div>
+            <p style="margin-top: 40px; font-size: 1.1em; font-weight: 600; text-align: center; color: var(--r-heading-color);">
+              Eerste reactie: paniek? 😰<br />
+              Maar vandaag leren we: <strong>jouw toekomst ligt ergens anders</strong>
+            </p>
+          </div>
+          <aside class="notes">
+            Open ChatGPT/Claude live. Toon opdracht. Start timer. Laat AI werken (30-45 sec). Toon resultaat.
+            Vraag: "Hoelang zou JIJ hierover doen?" Verwacht antwoord: 2-4 uur.
+            "Precies. AI doet dit in 30 seconden. Jouw eerste reactie: paniek? Terecht. Maar vandaag leren we: dit is niet jouw toekomst. Jouw toekomst ligt ergens anders."
+            Backup: Als ChatGPT/Claude down is, toon screenshot van voorbereide output.
+          </aside>
+        </section>
+
+        <!-- Slide 5: Centrale Vraag -->
+        <section>
+          <h2>De Centrale Vraag</h2>
+          <div class="box">
+            <p style="font-size: 1.3em; text-align: center; margin: 40px 0; line-height: 1.6;">
+              Als AI alle bekende modellen<br />
+              <span style="font-size: 0.85em;">(SWOT, DESTEP, Porter's Five Forces)</span><br />
+              beter en sneller kan toepassen dan jij...<br /><br />
+              <strong style="font-size: 1.2em; color: var(--r-heading-color);">Wat is dan jouw toegevoegde waarde?</strong>
+            </p>
+          </div>
+          <aside class="notes">
+            "Dit is DE vraag van jullie generatie. Niet 'kan AI mijn werk overnemen' - dat KAN het. De vraag is: welk werk wil je doen dat AI NIET kan? En hoe zorg je ervoor dat je daar goed in wordt?"
+          </aside>
+        </section>
+
+        <!-- Slide 6: Sorteer je Bijbaan-taken -->
+        <section>
+          <h2>Sorteer je Bijbaan-taken 📘📙📕</h2>
+          <div class="box" style="font-size: 0.85em;">
+            <p style="font-weight: 600; margin-bottom: 20px;">Denk aan je bijbaan (supermarkt, horeca, retail, callcenter...)</p>
+            <p style="margin-bottom: 15px;">Schrijf 6-8 taken op en sorteer ze:</p>
+
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+              <tr>
+                <th style="border: 2px solid var(--r-heading-color); padding: 12px; background: rgba(76, 175, 80, 0.1);">
+                  📘 ROUTINE
+                </th>
+                <th style="border: 2px solid var(--r-heading-color); padding: 12px; background: rgba(255, 152, 0, 0.1);">
+                  📙 GRENSGEBIED
+                </th>
+                <th style="border: 2px solid var(--r-heading-color); padding: 12px; background: rgba(244, 67, 54, 0.1);">
+                  📕 EXPLORATIE
+                </th>
+              </tr>
+              <tr>
+                <td style="border: 2px solid var(--r-heading-color); padding: 12px; font-size: 0.85em;">
+                  Ik volg een procedure/script<br />
+                  <em style="font-size: 0.9em;">(kassa draaien, voorraad aanvullen)</em>
+                </td>
+                <td style="border: 2px solid var(--r-heading-color); padding: 12px; font-size: 0.85em;">
+                  Ik moet nadenken/improviseren binnen kaders<br />
+                  <em style="font-size: 0.9em;">(klacht afhandelen)</em>
+                </td>
+                <td style="border: 2px solid var(--r-heading-color); padding: 12px; font-size: 0.85em;">
+                  Mijn manager doet dit / komt zelden voor<br />
+                  <em style="font-size: 0.9em;">(rooster maken, marketingactie)</em>
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin-top: 25px; font-size: 0.9em;"><strong>Opdracht (5 min individueel):</strong> Sorteer je taken in de 3 categorieën</p>
+          </div>
+          <aside class="notes">
+            5 min individueel werk. Think-Pair-Share (6 min): 3 min met buurman ("Welk % is routine?"), dan 3 min plenair.
+            Docent: "Hands up: wie heeft >70% routine?" (verwacht: bijna iedereen).
+
+            CRUCIALE INTERVENTIE (4 min): "Ik zie dat de meesten 70-90% routine hebben. Dat is NORMAAL voor een bijbaan. Jullie doen niks verkeerd.
+            Maar hier is de vraag: Over 4 jaar ben je HBO-bedrijfskundige afgestudeerd. Wil je dan NOG STEEDS dit werk doen?
+            [Pauze] Nee? Dan moet je transformeren. Van Region 2 (routine, waar je nu bent) naar Region 1 en 3 (strategie, waar je moet zijn).
+            En hier is het slechte nieuws: AI maakt die transformatie URGENT. Want alles in Region 2 wordt binnen 5-10 jaar geautomatiseerd.
+            Het goede nieuws? Deze opleiding kan je die transformatie laten maken. Maar alleen als je de juiste keuzes maakt. Laten we kijken hoe."
+
+            Totaal 15 min.
+          </aside>
+        </section>
+
+        <!-- PAUSE SLIDE 1 -->
+        <section data-background-color="#764ba2" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">
+          <div style="color: white; text-align: center;">
+            <h1 style="font-size: 3em; margin-bottom: 30px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.4);">☕ PAUZE</h1>
+            <p style="font-size: 1.5em; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">10 minuten</p>
+            <p style="font-size: 1em; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">We starten om [TIJD] met Blok 2: Inzicht</p>
+          </div>
+          <aside class="notes">
+            10 minuten pauze na Blok 1 (Confrontatie). Studenten hebben nu urgentie gevoeld (AI demo + bijbaan sorteer-oefening).
+            Na pauze: Bol.com voorbeeld en Genius Curve model geven inzicht in WAAR hun toekomst ligt.
+          </aside>
+        </section>
+
+        <!-- Slide 6B: Klantservice Kennisdomein Voorbeeld -->
+        <section>
+          <h2>🎯 Van Bekend naar Onbekend: Klantservice</h2>
+          <iframe src="klantservice-domain.html" style="width: 100%; height: 600px; border: none; border-radius: 8px; display: block; margin: 0 auto;"></iframe>
+          <aside class="notes">
+            3 minuten totaal. Stapsgewijze uitleg met klantservice voorbeeld.
+
+            [Stap 1 - 30 sec] "Voordat we het abstracte model zien, maken we het concreet met iets wat jullie kennen: klantservice."
+
+            [Stap 2 - 45 sec] "Bij x₀ = 0.5 zit je BEKENDE KENNIS: standaard vraag afhandelen met script. Je weet exact wat te doen. Dit is ROUTINE work 📘. AI kan dit perfect overnemen."
+
+            [Stap 3 - Laat animatie spelen - 45 sec] "Zie je het patroon? Hoe verder een vraag van je bekende kennis ligt:
+            - Bij 0.35-0.65: Nog binnen kaders (boze klant, chatbot). Region 2. Grensgebied 📙.
+            - Bij 0.2: Compleet nieuw systeem ontwerpen. Geen script, geen handleiding. Region 1. Genius work 📕.
+            - Bij 0.8: Anticiperen voordat klant vraag stelt. Ook ver weg. Region 3. Genius work 📕."
+
+            [Stap 4 - Wijs naar groene box onderaan - 60 sec] "En nu de cruciale koppeling naar jullie toekomst:
+            In je bijbaan doe je NU vooral 0.4-0.6: scripts volgen, templates toepassen. Dat is Region 2 📘.
+            Over 4 jaar, als HBO-bedrijfskundige, moet je kunnen werken bij 0.1-0.3 en 0.7-0.9: nieuwe systemen ontwerpen, complexe problemen oplossen zonder handleiding. Dat is Region 1/3 📕.
+
+            Van 'script volgen' naar 'script schrijven'. Van 'systeem gebruiken' naar 'systeem ontwerpen'.
+            DÁT is de transformatie die deze opleiding je moet geven."
+
+            Klik op de visualisatie om de animatie opnieuw af te spelen.
+
+            Totaal: 3 minuten.
+          </aside>
+        </section>
+
+        <!-- Slide 6C: Bol.com Logistiek Kennisdomein Voorbeeld -->
+        <section>
+          <h2>🚚 Nog een voorbeeld: Bol.com Logistiek</h2>
+          <iframe src="bolcom-logistiek-domain.html" style="width: 100%; height: 650px; border: none; border-radius: 8px; display: block; margin: 0 auto;"></iframe>
+          <aside class="notes">
+            2 minuten totaal. Tweede voorbeeld om het concept te versterken.
+
+            [Stap 1 - 30 sec] "Nog een voorbeeld om het echt duidelijk te maken: Bol.com's logistieke systeem."
+
+            [Stap 2 - 45 sec] "Bij x₀ = 0.5 zit het bestaande same-day delivery algoritme. Dat WERKT. Dat is bekende kennis 📘.
+            Dichtbij (0.35-0.65): Route 10% verbeteren, drone delivery testen. Nog binnen de kaders van bestaande logistiek. Region 2 📙.
+            Ver weg links (0.15): Quantum computing voor route-optimalisatie. Totaal nieuwe technologie, niemand heeft dit werkend. Region 1 📕.
+            Ver weg rechts (0.85): Leveringen naar Mars-kolonie. Totaal nieuwe context, andere zwaartekracht, geen wegen. Region 3 📕."
+
+            [Laat animatie spelen - 45 sec] "Zie je het verschil met de FOUTE interpretatie?
+            Dit zijn NIET verschillende bedrijfstakken (e-commerce, farma, ruimtevaart).
+            Dit zijn allemaal LOGISTIEKE vraagstukken, maar op verschillende afstanden van bekende kennis.
+
+            De x-as = hoeveel nieuwe kennis moet je creëren?
+            Niet: wat voor bedrijfstak is het?"
+
+            Klik op de visualisatie om de animatie opnieuw af te spelen.
+
+            Totaal: 2 minuten. Versterkt begrip van kennisdomein-concept.
+          </aside>
+        </section>
+
+        <!-- Slide 7A: Twee Soorten Kenniswerkers -->
+        <section>
+          <h2>Twee Soorten Kenniswerkers</h2>
+
+          <!-- Two-column layout -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 95%; margin: 20px auto;">
+
+            <!-- Left column: Routinewerker -->
+            <div class="box" style="margin: 0; font-size: 0.7em; padding: 25px 30px;">
+              <h3 style="font-size: 1.3em; margin-bottom: 15px; color: #2196f3;">📘 De Routinewerker</h3>
+
+              <p style="font-weight: 600; margin-bottom: 15px; font-size: 1.05em;">Past bestaande kennis toe</p>
+
+              <div style="background: rgba(33, 150, 243, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="font-weight: 600; margin-bottom: 8px;">Voorbeeld:</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">Junior consultant voert standaard SWOT-analyse uit voor nieuwe klant</p>
+              </div>
+
+              <div style="margin: 15px 0;">
+                <p style="font-weight: 600; color: #4caf50; margin-bottom: 5px;">✓ Sterkte:</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">Zeer waardevol voor problemen die lijken op wat we al kennen</p>
+              </div>
+
+              <div>
+                <p style="font-weight: 600; color: #f44336; margin-bottom: 5px;">✗ Limiet:</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">Toegevoegde waarde = 0 bij te nieuwe of onzekere vraagstukken</p>
+              </div>
+            </div>
+
+            <!-- Right column: Genius Worker -->
+            <div class="box" style="margin: 0; font-size: 0.7em; padding: 25px 30px;">
+              <h3 style="font-size: 1.3em; margin-bottom: 15px; color: #f44336;">📕 De Genius Worker</h3>
+
+              <p style="font-weight: 600; margin-bottom: 15px; font-size: 1.05em;">Creëert nieuwe kennis</p>
+
+              <div style="background: rgba(244, 67, 54, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="font-weight: 600; margin-bottom: 8px;">Voorbeeld:</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">Senior strateeg ontwikkelt compleet nieuw businessmodel voor crisis</p>
+              </div>
+
+              <div style="margin: 15px 0;">
+                <p style="font-weight: 600; color: #4caf50; margin-bottom: 5px;">✓ Sterkte:</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">Kan elk probleem aan, ook in compleet onbekend terrein</p>
+              </div>
+
+              <div>
+                <p style="font-weight: 600; color: #f44336; margin-bottom: 5px;">✗ Limiet:</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">Schaars en kostbaar (tijd, energie, denkvermogen)</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="fragment" style="margin-top: 20px;">
+            <p style="text-align: center; font-size: 0.85em; font-weight: 600; color: var(--r-heading-color);">
+              Vraag: Herken je jezelf in één van deze rollen in je bijbaan?
+            </p>
+          </div>
+
+          <aside class="notes">
+            3 minuten totaal.
+
+            Introduceer de twee basis-typen kenniswerkers uit het model.
+
+            "Voordat we het model zien, is het belangrijk om twee typen kenniswerkers te onderscheiden.
+
+            ROUTINEWERKER 📘: Dit is niet per se laaggeschoold. Dit zijn slimme mensen die bestaande kennis toepassen. Ze gebruiken bekende frameworks, best practices, precedenten. Denk aan een junior consultant die een SWOT doet - hij past een bekend model toe op een nieuwe situatie. Zeer waardevol! Maar hun limiet: als een probleem te nieuw of te onzeker wordt - te ver weg van bekende kennis - dan haken ze af. Hun toegevoegde waarde wordt nul.
+
+            GENIUS WORKER 📕: Dit zijn je topstrategen, R&D-wonders, senior experts. Zij creëren nieuwe kennis om problemen op te lossen. Ze werken vanuit first principles. Kunnen elk probleem aan, maar het kost meer moeite naarmate het probleem nieuwer is. En cruciaal: deze mensen zijn schaars. Je hebt er niet onbeperkt van.
+
+            [Fragment reveal] Vraag aan de zaal: 'In je bijbaan - welke rol speel jij meestal? Routinewerker of Genius?'
+            [Verwacht: meesten routinewerker]
+            'Dat is normaal. Bijbanen zijn zo ontworpen. Maar let op wat er straks gebeurt als AI komt...'
+
+            Transitie: Nu gaan we kijken naar het model dat deze twee workers visualiseert."
+          </aside>
+        </section>
+
+        <!-- Slide 7B: Genius Curve Model -->
+        <section style="padding: 20px 60px 15px !important;">
+          <h2 style="font-size: 1.1em; margin-bottom: 0.2em;">De Genius-on-Demand Curve</h2>
+
+          <!-- Two-column layout -->
+          <div style="display: grid; grid-template-columns: 65% 33%; gap: 2%; align-items: start; max-width: 98%; margin: 0 auto;">
+
+            <!-- Left column: iframe with graphs -->
+            <div>
+              <iframe src="genius.html" style="width: 100%; height: 540px; border: none; border-radius: 12px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);"></iframe>
+            </div>
+
+            <!-- Right column: explanation text -->
+            <div class="box" style="margin: 0; font-size: 0.58em; padding: 15px 18px;">
+              <p style="font-weight: 600; font-size: 1.2em; margin-bottom: 12px; color: var(--r-heading-color);">Drie regio's in het Knowledge Domain:</p>
+
+              <ul style="margin: 0 0 15px 0; padding-left: 20px; font-size: 1em; line-height: 1.5;">
+                <li style="margin-bottom: 10px;"><strong>Region 1</strong> (links): Extreem onzeker, exploratie → 📕 genius nodig</li>
+                <li style="margin-bottom: 10px;"><strong>Region 2</strong> (midden): Comfort zone → 📘 routine (Wat gebeurt hier als AI komt?)</li>
+                <li style="margin-bottom: 10px;"><strong>Region 3</strong> (rechts): Nieuwe toepassingen → 📕 genius nodig</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- Citation below the charts -->
+          <p style="font-size: 0.55em; line-height: 1.2; color: #333; margin: 2px auto 0; text-align: left; max-width: 98%;">
+            <strong>Bron:</strong> Agrawal, A. K., Gans, J. S., & Goldfarb, A. (2025). <em>Genius on Demand: The Value of Transformative AI</em> (No. w34316). NBER.
+          </p>
+          <aside class="notes">
+            3 minuten totaal. Toon genius.html iframe met beide grafieken.
+
+            "Dit is het Genius-on-Demand model van Agrawal, Gans & Goldfarb.
+
+            Bovenste grafiek toont de Value Functions - hoeveel waarde creëer je op verschillende afstanden van bekende kennis:
+            - Blauwe lijn: Routine Worker 📘 (die we net zagen) - waarde alleen dicht bij het bekende
+            - Rode stippellijn: Genius Worker 📕 - kan overal waarde creëren
+
+            Onderste grafiek: Waar wint wie? Groen = Genius heeft voordeel. Negatief = Routine wint.
+
+            Let op de drie regio's [wijs naar slide]:
+            - Region 1 en 3: Genius nodig
+            - Region 2: Routine werkt prima... maar let op de vraag: Wat gebeurt hier als AI komt?
+
+            Die vraag gaan we nu beantwoorden."
+          </aside>
+        </section>
+
+        <!-- Slide 7C: Wat is AI in dit model? -->
+        <section>
+          <h2 style="margin-bottom: 0.25em;">Wat is AI in dit model?</h2>
+
+          <!-- Central statement -->
+          <div style="text-align: center; margin: 25px auto;">
+            <p style="font-size: 1.6em; font-weight: 700; color: var(--r-heading-color); line-height: 1.2;">
+              AI = Genius Worker<br/>zonder schaarsheid
+            </p>
+          </div>
+
+          <!-- Three characteristics in boxes -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 92%; margin: 20px auto;">
+
+            <div class="box" style="margin: 0; padding: 20px 18px; text-align: center; font-size: 0.65em;">
+              <div style="font-size: 2.2em; margin-bottom: 12px;">🧠</div>
+              <p style="font-weight: 600; font-size: 1.05em; margin-bottom: 8px; color: var(--r-heading-color);">Kan nieuwe kennis creëren</p>
+              <p style="font-size: 0.9em; line-height: 1.4;">(net als menselijk genius)</p>
+            </div>
+
+            <div class="box" style="margin: 0; padding: 20px 18px; text-align: center; font-size: 0.65em;">
+              <div style="font-size: 2.2em; margin-bottom: 12px;">∞</div>
+              <p style="font-weight: 600; font-size: 1.05em; margin-bottom: 8px; color: var(--r-heading-color);">Niet schaars</p>
+              <p style="font-size: 0.9em; line-height: 1.4;">(kopieerbaar naar miljarden instanties)</p>
+            </div>
+
+            <div class="box" style="margin: 0; padding: 20px 18px; text-align: center; font-size: 0.65em;">
+              <div style="font-size: 2.2em; margin-bottom: 12px;">💰</div>
+              <p style="font-weight: 600; font-size: 1.05em; margin-bottom: 8px; color: var(--r-heading-color);">Bijna gratis</p>
+              <p style="font-size: 0.9em; line-height: 1.4;">(na initiële training)</p>
+            </div>
+
+          </div>
+
+          <!-- Crucial question -->
+          <div class="fragment" style="margin-top: 25px;">
+            <div class="box" style="background: rgba(244, 67, 54, 0.1); border: 2px solid #f44336; padding: 20px; max-width: 82%; margin: 0 auto;">
+              <p style="font-size: 0.75em; font-weight: 600; text-align: center; color: #c62828; line-height: 1.5;">
+                Als AI een genius is die je onbeperkt kan inzetten...<br/>
+                <span style="font-size: 1.1em;">Wat gebeurt er dan met menselijke workers?</span>
+              </p>
+            </div>
+          </div>
+
+          <aside class="notes">
+            2 minuten totaal.
+
+            "Laten we eerst duidelijk maken wat AI betekent in dit economische model.
+
+            [Centraal statement] AI is een Genius Worker zonder schaarsheid. Laat dat even tot je doordringen.
+
+            [Wijs naar de drie boxen]
+
+            AI heeft drie cruciale eigenschappen:
+
+            1. 🧠 Kan nieuwe kennis creëren - net als een menselijk genius. Het is niet alleen een database of calculator. Het kan creative problem-solving doen.
+
+            2. ∞ Niet schaars - en dit is het game-changer. Een menselijk genius? Schaars. Je hebt er 5 in je bedrijf, misschien 10. AI? Eenmaal getraind kun je hem kopiëren naar miljarden instanties. Instant.
+
+            3. 💰 Bijna gratis - na de initiële training zijn de marginale kosten van een extra AI vrijwel nul. Terwijl een extra menselijk genius je tonnen kost per jaar.
+
+            [Fragment reveal - rode box]
+
+            En nu de cruciale vraag die het hele model drijft: Als je een genius hebt die onbeperkt beschikbaar en bijna gratis is... wat gebeurt er dan met je menselijke routinewerkers? En met je schaarse menselijke genieën?
+
+            Dat gaan we nu zien."
+          </aside>
+        </section>
+
+        <!-- Slide 7D: De Impact - Fase 1 en 2 -->
+        <section>
+          <h2 style="font-size: 1.05em; margin-bottom: 0.25em;">De Impact: Wat gebeurt er als AI komt?</h2>
+
+          <!-- Two-column layout for phases -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 92%; margin: 15px auto;">
+
+            <!-- Left column: Phase 1 -->
+            <div class="box" style="margin: 0; padding: 18px 22px; font-size: 0.6em; border: 2px solid #ff9800;">
+              <h3 style="font-size: 1.2em; margin-bottom: 10px; color: #ff9800; line-height: 1.2;">⚡ Fase 1: Korte Termijn<br/>(De Schok)</h3>
+
+              <p style="font-size: 0.9em; margin-bottom: 12px; line-height: 1.3;">Organisatie nog niet aangepast:</p>
+
+              <div style="background: rgba(255, 152, 0, 0.05); padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+                <p style="font-weight: 600; margin-bottom: 5px; color: #f57c00; font-size: 0.95em;">AI-genieën komen:</p>
+                <p style="font-size: 0.85em; line-height: 1.3;">Nemen "makkelijkere" geniale taken over</p>
+              </div>
+
+              <div style="background: rgba(244, 67, 54, 0.05); padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+                <p style="font-weight: 600; margin-bottom: 5px; color: #d32f2f; font-size: 0.95em;">Menselijke genieën:</p>
+                <p style="font-size: 0.85em; line-height: 1.3;">Gedwongen tot <strong>hyper-specialisatie</strong></p>
+              </div>
+
+              <div style="background: rgba(33, 150, 243, 0.05); padding: 12px; border-radius: 6px;">
+                <p style="font-weight: 600; margin-bottom: 5px; color: #1976d2; font-size: 0.95em;">Routinewerkers:</p>
+                <p style="font-size: 0.85em; line-height: 1.3;">Blijven (nog) doen wat ze deden</p>
+              </div>
+            </div>
+
+            <!-- Right column: Phase 2 -->
+            <div class="box" style="margin: 0; padding: 18px 22px; font-size: 0.6em; border: 2px solid #f44336;">
+              <h3 style="font-size: 1.2em; margin-bottom: 10px; color: #f44336; line-height: 1.2;">🎯 Fase 2: Lange Termijn<br/>(Nieuwe Balans)</h3>
+
+              <p style="font-size: 0.9em; margin-bottom: 12px; line-height: 1.3;">Manager optimaliseert alles:</p>
+
+              <div style="background: rgba(244, 67, 54, 0.1); padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 3px solid #d32f2f;">
+                <p style="font-weight: 600; margin-bottom: 5px; color: #b71c1c; font-size: 0.95em;">❌ Routinewerkers:</p>
+                <p style="font-size: 0.85em; line-height: 1.3;"><strong>Volledig verdrongen</strong> door AI</p>
+              </div>
+
+              <div style="background: rgba(255, 152, 0, 0.05); padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 3px solid #f57c00;">
+                <p style="font-weight: 600; margin-bottom: 5px; color: #e65100; font-size: 0.95em;">⚠️ Menselijke genieën:</p>
+                <p style="font-size: 0.85em; line-height: 1.3;"><strong>Ultra-gespecialiseerd</strong> op grenzen van kennis</p>
+              </div>
+
+              <div style="background: rgba(76, 175, 80, 0.05); padding: 12px; border-radius: 6px; border-left: 3px solid #4caf50;">
+                <p style="font-weight: 600; margin-bottom: 5px; color: #2e7d32; font-size: 0.95em;">✅ AI:</p>
+                <p style="font-size: 0.85em; line-height: 1.3;">Neemt <strong>alle routine</strong> + standaard geniale taken over</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="fragment" style="margin-top: 15px;">
+            <div class="box" style="background: rgba(8, 61, 119, 0.05); padding: 15px; max-width: 80%; margin: 0 auto; border-left: 4px solid var(--r-heading-color);">
+              <p style="font-size: 0.65em; font-weight: 600; text-align: center; line-height: 1.4;">
+                Kernboodschap: In Fase 2 is er geen plek meer voor "routine kenniswerk".<br/>
+                Alleen ultra-gespecialiseerde menselijke genius blijft over.
+              </p>
+            </div>
+          </div>
+
+          <aside class="notes">
+            4 minuten totaal.
+
+            "Het model beschrijft twee fasen:
+
+            FASE 1 - DE SCHOK (2 min):
+            In het begin is je organisatie nog niet aangepast. Je hebt AI-genieën beschikbaar, maar contracten, processen, alles is nog hetzelfde.
+
+            Wat gebeurt er?
+            - AI-genieën [wijs naar oranje box] nemen de makkelijkere geniale taken over. Niet de allermoeilijkste, maar wel de taken die nieuw zijn maar nog redelijk dichtbij bekende kennis liggen.
+
+            - Je menselijke genieën [wijs naar rode box] worden gedwongen tot hyper-specialisatie. Ze kunnen alleen nog ingezet worden waar ze echt meer waarde toevoegen dan AI - dat zijn de allermoeilijkste problemen. Waarom? Economie: hun comparatieve voordeel is daar het grootst.
+
+            - Routinewerkers blijven nog bestaan, want contracten zijn nog niet aangepast.
+
+            FASE 2 - NIEUWE BALANS (2 min):
+            Nu heeft de organisatie zich volledig aangepast. Jij als manager optimaliseert de inzet van alle drie de groepen.
+
+            En nu komt het slechte nieuws:
+
+            [Wijs naar rode box rechts]
+            ❌ Routinewerkers: Volledig verdrongen. Waarom? AI-genieën zijn zó goed en zó overvloedig dat ze routine-werk volledig overnemen. Ze kunnen immers ook bestaande kennis toepassen, maar beter en goedkoper.
+
+            ⚠️ Menselijke genieën: Blijven bestaan, maar ultra-gespecialiseerd. Alleen de meest grensverleggende vraagstukken.
+
+            ✅ AI: Neemt alles in Region 2 over + een groot deel van Region 1 en 3.
+
+            [Fragment reveal]
+            Kernboodschap: Er is geen plek meer voor 'routine kenniswerk'. Jullie bijbaan? 70-90% Region 2? Dat verdwijnt in dit scenario.
+
+            Maar nu de grote vraag: Wat betekent dit voor JULLIE?"
+          </aside>
+        </section>
+
+        <!-- Slide 7E: Betekenis voor HBO Bedrijfskunde -->
+        <section>
+          <h2 style="font-size: 1.05em; margin-bottom: 0.2em;">Wat betekent dit voor HBO Bedrijfskunde?</h2>
+
+          <!-- Three implications in boxes -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 92%; margin: 12px auto;">
+
+            <div class="box" style="margin: 0; padding: 15px 18px; font-size: 0.58em;">
+              <div style="font-size: 2em; text-align: center; margin-bottom: 8px;">📊</div>
+              <h3 style="font-size: 1.1em; margin-bottom: 10px; color: var(--r-heading-color); text-align: center; line-height: 1.2;">Jouw rol als manager verandert</h3>
+              <ul style="font-size: 0.92em; line-height: 1.4; padding-left: 16px; margin: 0;">
+                <li style="margin-bottom: 6px;">Van "mensen aansturen" → "resources alloceren"</li>
+                <li style="margin-bottom: 6px;">Resources = mensen ÉN AI</li>
+                <li>Kernvraag: "Wie/wat heeft voordeel?"</li>
+              </ul>
+            </div>
+
+            <div class="box" style="margin: 0; padding: 15px 18px; font-size: 0.58em;">
+              <div style="font-size: 2em; text-align: center; margin-bottom: 8px;">⚠️</div>
+              <h3 style="font-size: 1.1em; margin-bottom: 10px; color: var(--r-heading-color); text-align: center; line-height: 1.2;">Routine kenniswerk verliest waarde</h3>
+              <ul style="font-size: 0.92em; line-height: 1.4; padding-left: 16px; margin: 0;">
+                <li style="margin-bottom: 6px;">Analyses, rapportages → geautomatiseerd</li>
+                <li>Waarde: "SWOT toepassen" → "nieuw framework bedenken"</li>
+              </ul>
+            </div>
+
+            <div class="box" style="margin: 0; padding: 15px 18px; font-size: 0.58em;">
+              <div style="font-size: 2em; text-align: center; margin-bottom: 8px;">🎯</div>
+              <h3 style="font-size: 1.1em; margin-bottom: 10px; color: var(--r-heading-color); text-align: center; line-height: 1.2;">Focus op 'Human Skills' aan de rand</h3>
+              <ul style="font-size: 0.92em; line-height: 1.4; padding-left: 16px; margin: 0;">
+                <li style="margin-bottom: 6px;">Creativiteit in onbekend terrein</li>
+                <li style="margin-bottom: 6px;">Strategie zonder precedent</li>
+                <li>Nieuwe vragen stellen</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- Nuancering -->
+          <div class="fragment" style="margin-top: 15px;">
+            <div class="box" style="background: rgba(76, 175, 80, 0.08); border: 2px solid #4caf50; padding: 15px 20px; max-width: 88%; margin: 0 auto; font-size: 0.6em;">
+              <h3 style="font-size: 1.05em; margin-bottom: 8px; color: #2e7d32; text-align: center;">⚖️ Belangrijke nuancering van de onderzoekers</h3>
+              <p style="margin-bottom: 8px; line-height: 1.4;">
+                Dit model: AI als <strong>vervanging</strong>. Maar AI kan ook <strong>tool</strong> zijn (complementariteit):
+              </p>
+              <ul style="line-height: 1.4; padding-left: 20px; margin-bottom: 8px;">
+                <li style="margin-bottom: 5px;">Routinewerker + AI = kan moeilijker werk aan</li>
+                <li>Genius + AI = kan sneller/verder innoveren</li>
+              </ul>
+              <p style="font-weight: 600; text-align: center; color: #1b5e20; line-height: 1.3; font-size: 1.05em;">
+                De realiteit zal waarschijnlijk tussen beide in liggen.
+              </p>
+            </div>
+          </div>
+
+          <!-- Call to action -->
+          <div class="fragment" style="margin-top: 12px;">
+            <div class="box" style="background: rgba(8, 61, 119, 0.05); padding: 12px; max-width: 80%; margin: 0 auto; border-left: 4px solid var(--r-heading-color);">
+              <p style="font-size: 0.65em; font-weight: 600; text-align: center; color: var(--r-heading-color); line-height: 1.4;">
+                Over 4 jaar: ben je een routinewerker die verdrongen wordt,<br/>
+                of train je nu al voor Region 1/3 genius work?
+              </p>
+            </div>
+          </div>
+
+          <aside class="notes">
+            5 minuten totaal.
+
+            "Oké, zwaar verhaal. Maar wat betekent dit concreet voor JULLIE als toekomstige HBO Bedrijfskundigen? Drie dingen:
+
+            [Wijs naar de drie boxen - 3 min]
+
+            1️⃣ JOUW ROL ALS MANAGER VERANDERT (1 min):
+            Over 4 jaar word je manager. Maar je taak is niet meer primair 'mensen aansturen'. Je taak wordt: resources optimaal alloceren. En die resources zijn mensen én AI-systemen.
+
+            Bij elke taak moet je denken: Wie of wat heeft het grootste comparatieve voordeel? Menselijk genius voor dit strategische vraagstuk? Of AI omdat het routine is? Of een combinatie?
+
+            Dit is een fundamenteel andere skillset dan traditioneel management.
+
+            2️⃣ ROUTINE KENNISWERK VERLIEST WAARDE (1.5 min):
+            Veel van wat nu de basis is van bedrijfskunde - standaard analyses, rapportages, procesoptimalisaties met bekende modellen - wordt in dit model geautomatiseerd.
+
+            De waarde zit niet meer in het TOEPASSEN van een SWOT-analyse. Die kan AI ook. De waarde zit in het BEDENKEN van een compleet nieuw strategisch framework dat nog niet bestaat.
+
+            Jullie bijbaan nu? Waarschijnlijk 70-90% Region 2. Dat verdwijnt. Jullie HBO moet ervoor zorgen dat je Region 1/3 skills ontwikkelt.
+
+            3️⃣ FOCUS OP HUMAN SKILLS AAN DE RAND (1.5 min):
+            De enige menselijke taken die overblijven in dit model zijn aan de absolute rand van kennis:
+            - Pure creativiteit in compleet onbekend terrein
+            - Strategiebepaling zonder precedent
+            - Het stellen van nieuwe vragen (niet het beantwoorden van bekende vragen)
+
+            [Fragment 1 reveal - Nuancering groene box]
+
+            Maar - en dit is cruciaal - de onderzoekers zelf zeggen: dit model kijkt naar AI als vervanging. Er is ook een ander scenario: complementariteit.
+
+            AI als tool die de routinewerker in staat stelt moeilijker werk te doen. AI die de genius helpt sneller en verder te innoveren.
+
+            De realiteit zal waarschijnlijk tussen beide in liggen. Niet pure vervanging, maar ook niet zonder impact.
+
+            [Fragment 2 reveal - Call to action]
+
+            Dus de vraag voor jullie: Over 4 jaar, als jullie afstuderen - ben je een routinewerker die verdrongen wordt? Of train je nu al voor Region 1/3 genius work?
+
+            Die keuze maak je nu. In de opdrachten die je kiest. In de manier waarop je AI gebruikt. In de skills die je ontwikkelt.
+
+            Laten we daar even over stemmen..."
+          </aside>
+        </section>
+
+        <!-- Slide 8: Dubbele Poll - % Routine -->
+        <section>
+          <h2 style="font-size: 0.85em !important; margin-bottom: 8px !important;">Poll: Routine in je Werk</h2>
+
+          <!-- Side-by-side grid container for both polls -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 95%; margin: 0 auto;">
+
+            <!-- Poll 1: HUIDIGE bijbaan -->
+            <div class="poll-container" style="margin: 0; padding: 6px 10px 8px;">
+              <div class="poll-question" style="font-size: 0.68em; margin-bottom: 5px;">
+                <strong>Poll 1:</strong> Welk % van je HUIDIGE bijbaan is routine (📘 Region 2)?
+              </div>
+              <div class="poll-options" id="routine1-poll-options" style="grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 5px;">
+                <div class="poll-option" data-option="a" onclick="vote('routine1', 'a')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">A: 0-30%</span>
+                </div>
+                <div class="poll-option" data-option="b" onclick="vote('routine1', 'b')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">B: 30-60%</span>
+                </div>
+                <div class="poll-option" data-option="c" onclick="vote('routine1', 'c')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">C: 60-90%</span>
+                </div>
+                <div class="poll-option" data-option="d" onclick="vote('routine1', 'd')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">D: 90-100%</span>
+                </div>
+              </div>
+              <div class="poll-results routine-poll-results-compact" id="routine1-poll-results" style="display: none;">
+                <!-- Results will be injected here -->
+              </div>
+              <div class="poll-controls">
+                <button onclick="showResults('routine1')" style="font-size: 0.65em; padding: 4px 10px;">Toon Resultaten</button>
+                <button onclick="resetPoll('routine1')" class="reset-button" style="background: #dc3545; border-color: #dc3545; font-size: 0.65em; padding: 4px 10px;">Reset</button>
+              </div>
+            </div>
+
+            <!-- Poll 2: Toekomst (4 jaar) -->
+            <div class="poll-container" style="margin: 0; padding: 6px 10px 8px;">
+              <div class="poll-question" style="font-size: 0.68em; margin-bottom: 5px;">
+                <strong>Poll 2:</strong> Over 4 jaar, als HBO-bedrijfskundige: welk % van je werk MOET routine zijn?
+              </div>
+              <div class="poll-options" id="routine2-poll-options" style="grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 5px;">
+                <div class="poll-option" data-option="a" onclick="vote('routine2', 'a')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">A: &lt;10%</span>
+                  <span class="poll-option-text" style="font-size: 0.42em;">Vooral strategie</span>
+                </div>
+                <div class="poll-option" data-option="b" onclick="vote('routine2', 'b')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">B: 10-30%</span>
+                  <span class="poll-option-text" style="font-size: 0.42em;">Mix, vooral denken</span>
+                </div>
+                <div class="poll-option" data-option="c" onclick="vote('routine2', 'c')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">C: 30-60%</span>
+                  <span class="poll-option-text" style="font-size: 0.42em;">Evenwichtige mix</span>
+                </div>
+                <div class="poll-option" data-option="d" onclick="vote('routine2', 'd')" style="padding: 3px 5px;">
+                  <span class="poll-option-label" style="font-size: 0.5em;">D: &gt;60%</span>
+                  <span class="poll-option-text" style="font-size: 0.42em;">Routine is prima</span>
+                </div>
+              </div>
+              <div class="poll-results routine-poll-results-compact" id="routine2-poll-results" style="display: none;">
+                <!-- Results will be injected here -->
+              </div>
+              <div class="poll-controls">
+                <button onclick="showResults('routine2')" style="font-size: 0.65em; padding: 4px 10px;">Toon Resultaten</button>
+                <button onclick="resetPoll('routine2')" class="reset-button" style="background: #dc3545; border-color: #dc3545; font-size: 0.65em; padding: 4px 10px;">Reset</button>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            5 minuten totaal.
+
+            POLL 1 (2 min): Huidige % routine in bijbaan.
+            Toon resultaten. Verwachte uitkomst: Meeste stemmen bij C (60-90%) of D (90-100%).
+            Docent: "Oké, de meesten zitten tussen 60-100% routine. Dat klopt. Jullie doen niks verkeerd - bijbanen zijn zo ontworpen."
+
+            POLL 2 (2 min): Gewenste % routine over 4 jaar.
+            Toon resultaten. Verwachte uitkomst: Meeste stemmen bij A (&lt;10%) of B (10-30%).
+
+            SYNTHESE (1 min):
+            "Zie je het verschil?
+            - NU: 70-90% routine
+            - GEWENST over 4 jaar: &lt;30% routine
+
+            Dat is een GIGANTISCHE transformatie. Van 📘 naar 📕. Van toepassen naar ontwerpen. Van volgen naar beslissen.
+            Deze opleiding moet je die transformatie laten maken. En AI maakt het urgent. Want als je na 4 jaar HBO nog steeds 70% routine doet, neemt AI je werk over."
+          </aside>
+        </section>
+
+        <!-- Slide 9: Van Bijbaan → Bedrijfskundige -->
+        <section>
+          <h2>🚀 Van Bijbaan → Bedrijfskundige</h2>
+          <div class="box" style="font-size: 0.58em;">
+            <table class="matrix-table" style="font-size: 1em;">
+              <thead>
+                <tr>
+                  <th style="width: 22%;">BIJBAAN (NU)</th>
+                  <th style="width: 9%;">REGIO</th>
+                  <th style="width: 25%;">HBO-BEDRIJFSKUNDIGE (STRAKS)</th>
+                  <th style="width: 9%;">REGIO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Kassa draaien volgens protocol</td>
+                  <td style="text-align: center;">📙 R2</td>
+                  <td><strong>Kassasysteem kiezen</strong> (welke software past bij strategie?)</td>
+                  <td style="text-align: center;">📕 R1/3</td>
+                </tr>
+                <tr>
+                  <td>Voorraad aanvullen op basis van systeem</td>
+                  <td style="text-align: center;">📙 R2</td>
+                  <td><strong>Voorraadstrategie bepalen</strong> (Just-in-time vs. veiligheidsvoorraad?)</td>
+                  <td style="text-align: center;">📕 R1/3</td>
+                </tr>
+                <tr>
+                  <td>Standaard vraag afhandelen volgens script</td>
+                  <td style="text-align: center;">📙 R2</td>
+                  <td><strong>Klachtbeleid ontwerpen</strong> (balans tevredenheid & kosten)</td>
+                  <td style="text-align: center;">📕 R1/3</td>
+                </tr>
+                <tr>
+                  <td>Social media post plaatsen</td>
+                  <td style="text-align: center;">📙 R2</td>
+                  <td><strong>Social media strategie</strong> (welke kanalen, doelgroepen, waarom?)</td>
+                  <td style="text-align: center;">📕 R1/3</td>
+                </tr>
+                <tr>
+                  <td>Standaard SWOT invullen</td>
+                  <td style="text-align: center;">📙 R2</td>
+                  <td><strong>Beslissen of SWOT relevant is</strong> voor dit specifieke probleem</td>
+                  <td style="text-align: center;">📕 R1/3</td>
+                </tr>
+                <tr>
+                  <td>Financiële ratio's berekenen</td>
+                  <td style="text-align: center;">📙 R2</td>
+                  <td><strong>Interpreteren wat ratio's betekenen</strong> voor strategie</td>
+                  <td style="text-align: center;">📕 R1/3</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="fragment" style="margin-top: 20px;">
+              <p style="font-weight: 600; font-size: 1.15em; color: var(--r-heading-color);">
+                Patroon: In je bijbaan <strong>PAS JE TOE</strong> wat anderen bedachten.<br />
+                Als bedrijfskundige <strong>BEDENK JIJ</strong> wat anderen gaan toepassen.
+              </p>
+              <p style="margin-top: 15px; font-size: 1.1em;">
+                AI kan perfect toepassen. AI kan (nog) niet goed beslissen <strong>WAT</strong> toegepast moet worden en <strong>WAAROM</strong>.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            8 minuten. Bespreek 4-5 voorbeelden uit de tabel (1 min per rij).
+
+            "KASSA: Nu draai je kassa - je volgt het systeem. Straks KIES je welk kassasysteem je bedrijf moet gebruiken. Dat vereist: bedrijfsstrategie begrijpen, leveranciers vergelijken, kosten-baten afwegen. Geen handleiding voor."
+
+            "VOORRAAD: Nu vul je aan wat het systeem zegt. Straks bepaal je DE STRATEGIE: Just-in-Time (goedkoop maar risicovol) of buffervoorraad (duur maar veilig)? AI kan data analyseren, maar JIJ beslist."
+
+            "SWOT: Nu vul je een template in (4 kwadrant, klaar). Straks BESLIS je: is SWOT het juiste model? Of Porter? Of DESTEP? Modelkeuze is genius work."
+
+            PATROON BENADRUKKEN:
+            "Zie je het verschil? In je bijbaan PAS JE TOE. Als bedrijfskundige BEDENK JIJ.
+            AI kan perfect toepassen. AI kan nog niet goed beslissen WAT toegepast moet worden en WAAROM.
+            Net als bij Bol.com: AI kan nieuwe productcategorie toevoegen (R2). Maar beslissen of Bol.com fysieke winkels moet openen? R1/3 - strategisch, ethisch, complex. Daar ligt jouw toekomst."
+          </aside>
+        </section>
+
+        <!-- Slide 10: Persoonlijke SWOT -->
+        <section>
+          <h2>Persoonlijke SWOT met Carrière-lens</h2>
+          <div class="box" style="font-size: 0.58em;">
+            <p style="margin-bottom: 10px;">Maak een SWOT van <strong>jezelf</strong>, met AI-lens en focus op je toekomst over 4 jaar:</p>
+
+            <p><strong>STRENGTHS (intern)</strong> - Welke Region 1/3 skills heb je NU al?</p>
+            <ul style="font-size: 0.95em; margin-bottom: 8px;">
+              <li>Creatief denken, mensen overtuigen, complexe situaties doorgronden, ethisch redeneren, dwars denken</li>
+              <li>In je bijbaan: zijn er momenten dat je off-script moet en dat goed gaat?</li>
+              <li><em>Bijvoorbeeld: "Ik kan goed improviseren bij lastige klanten" of "Ik zie verbanden die anderen missen"</em></li>
+            </ul>
+
+            <p style="margin-top: 10px;"><strong>WEAKNESSES (intern)</strong> - Waar hang je nog in Region 2?</p>
+            <ul style="font-size: 0.95em; margin-bottom: 8px;">
+              <li>Hoeveel % van je tijd (bijbaan + studie) besteed je aan routine (📙)?</li>
+              <li>Hoe comfortabel ben je met onzekerheid en problemen zonder handleiding?</li>
+              <li><em>Bijvoorbeeld: "Ik vind open opdrachten eng" of "Ik wil graag duidelijke instructies"</em></li>
+            </ul>
+
+            <p style="margin-top: 10px;"><strong>OPPORTUNITIES (extern)</strong> - Hoe kun je richting Region 1/3 groeien?</p>
+            <ul style="font-size: 0.95em; margin-bottom: 8px;">
+              <li>Welke vakken dit jaar trainen Region 1/3 skills? (Analyse, evaluatie, creëren)</li>
+              <li>Welke AI-tools kun je leren om routine sneller te doen (zodat je tijd overhoudt)?</li>
+              <li>Extracurriculair: bestuur studievereniging, case competitions, startups</li>
+            </ul>
+
+            <p style="margin-top: 10px;"><strong>THREATS (extern)</strong> - Wat kan je transformatie tegenhouden?</p>
+            <ul style="font-size: 0.95em; margin-bottom: 8px;">
+              <li>Welke bijbaan-taken verdwijnen door AI in de komende jaren?</li>
+              <li>Wat als je alleen "veilige" vakken kiest en nooit R1/3 oefent?</li>
+            </ul>
+          </div>
+          <p style="font-size: 0.75em; margin-top: 15px;"><em><strong>Opdracht: 8 minuten individueel werken</strong></em></p>
+          <aside class="notes">
+            8 minuten individueel werk aan persoonlijke SWOT met bijbaan-context en carrière-lens.
+
+            Loop rond, help studenten die vastlopen met voorbeelden:
+            "Denk aan een moment in je bijbaan dat NIET routine was - wat deed je toen?"
+
+            Na 8 min: Trio-discussie (Slide 11, 12 min) en Plenaire terugkoppeling (Slide 12, 10 min).
+          </aside>
+        </section>
+
+        <!-- Slide 11: Trio-discussie SWOT -->
+        <section>
+          <h2>Trio-discussie: Deel je SWOT</h2>
+          <div class="box" style="font-size: 0.85em;">
+            <p style="font-weight: 600; margin-bottom: 20px;">Vorm trio's met mensen die je nog niet goed kent</p>
+
+            <div style="background: rgba(8, 61, 119, 0.05); padding: 20px; border-radius: 8px; margin: 15px 0;">
+              <p style="font-weight: 600; margin-bottom: 10px;">Ronde 1-3: Elk 3 minuten per persoon (9 min totaal)</p>
+              <ul style="font-size: 0.95em;">
+                <li>Persoon 1 deelt SWOT → anderen luisteren en stellen 1 vraag</li>
+                <li>Persoon 2 deelt SWOT → idem</li>
+                <li>Persoon 3 deelt SWOT → idem</li>
+              </ul>
+            </div>
+
+            <div style="background: rgba(76, 175, 80, 0.05); padding: 20px; border-radius: 8px; margin: 15px 0;">
+              <p style="font-weight: 600; margin-bottom: 10px;">Ronde 4: Geef elkaar één concreet advies (3 min)</p>
+              <ul style="font-size: 0.95em;">
+                <li>"Als ik jou was, zou ik... [één concrete actie]"</li>
+              </ul>
+            </div>
+
+            <p style="margin-top: 20px; font-size: 0.9em;"><strong>Totaal: 12 minuten</strong></p>
+          </div>
+          <aside class="notes">
+            12 minuten trio-discussie.
+
+            Facilitatie: Loop rond, luister mee, noteer interessante inzichten voor plenaire terugkoppeling.
+            Help trio's die stil vallen: "Vraag elkaar: wat vind je het moeilijkst - routine loslaten of onzekerheid accepteren?"
+
+            Motivatie: Social (peer learning) + Relatedness (erkenning van gedeelde uitdagingen)
+          </aside>
+        </section>
+
+        <!-- Slide 12: Plenaire Terugkoppeling -->
+        <section>
+          <h2>Plenaire Terugkoppeling</h2>
+          <div class="box" style="font-size: 0.85em;">
+            <p style="font-weight: 600; font-size: 1.1em; margin-bottom: 20px; color: var(--r-heading-color);">
+              Wat was het meest verrassende inzicht uit jullie gesprek?
+            </p>
+
+            <div style="background: rgba(8, 61, 119, 0.03); padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <p style="font-weight: 600; margin-bottom: 10px;">Denk na over:</p>
+              <ul style="font-size: 0.95em; line-height: 1.6;">
+                <li>💡 Welke skills/kwaliteiten heeft jouw team besproken die je nu anders waardeert?</li>
+                <li>😰 Wat vind je moeilijk of spannend aan de transformatie naar Region 1/3?</li>
+                <li>⚠️ Wat betekent dit voor jouw keuzes de komende jaren?</li>
+              </ul>
+            </div>
+
+            <p style="margin-top: 25px; font-size: 0.9em;"><em>4-5 studenten delen (elk 1-2 min) = 10 minuten totaal</em></p>
+          </div>
+          <aside class="notes">
+            10 minuten plenaire terugkoppeling.
+
+            Vraag: "Wat was het meest verrassende inzicht uit jullie gesprek?"
+            Laat 4-5 studenten delen (elk 1-2 min).
+
+            DOCENT-SYNTHESE (3 min):
+            "Ik hoor drie patronen:
+
+            1. HERKENNING: Veel van jullie zeggen: creativiteit, contextbegrip, ethisch oordeelsvermogen. Dat is precies Region 1/3! Jullie hebben die skills al, maar je onderschat ze.
+
+            2. ANGST voor onzekerheid: Sommigen zeggen: ik vind open opdrachten eng. Goed dat je dat erkent. Want over 4 jaar is je hele werk 'open opdrachten'. Beter om dat NU te oefenen dan over 4 jaar te ontdekken.
+
+            3. URGENTIE: Jullie snappen: de klok tikt. AI wordt beter, jullie bijbaan wordt kwetsbaarder. De transformatie is geen luxe, het is noodzaak.
+
+            Nu gaan we dat omzetten in actie. Niet over 4 jaar beginnen, maar NU."
+          </aside>
+        </section>
+
+        <!-- Slide 13: Confrontatiematrix - Jouw 4-jarenplan -->
+        <section>
+          <h2>Confrontatiematrix - Jouw 4-jarenplan</h2>
+          <div class="box" style="font-size: 0.7em;">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th style="width: 20%;"></th>
+                  <th style="width: 40%;">OPPORTUNITIES</th>
+                  <th style="width: 40%;">THREATS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>STRENGTHS</th>
+                  <td>
+                    <strong>SO-Strategieën: UITBOUWEN</strong><br />
+                    <span style="font-size: 0.9em;">Hoe benut ik mijn sterke punten voor kansen?</span><br /><br />
+                    <em style="font-size: 0.85em;">Voorbeeld: "Mijn analytisch vermogen (S) inzetten om AI-tools te leren (O) → Volg online cursus 'Python for Business Analytics' deze zomer"</em>
+                  </td>
+                  <td>
+                    <strong>ST-Strategieën: BESCHERMEN</strong><br />
+                    <span style="font-size: 0.9em;">Hoe gebruik ik mijn sterke punten om bedreigingen tegen te gaan?</span><br /><br />
+                    <em style="font-size: 0.85em;">Voorbeeld: "Mijn communicatievaardigheden (S) waar AI faalt (T) → Ontwikkel expertise in change management"</em>
+                  </td>
+                </tr>
+                <tr>
+                  <th>WEAKNESSES</th>
+                  <td>
+                    <strong>WO-Strategieën: ONTWIKKELEN</strong><br />
+                    <span style="font-size: 0.9em;">Hoe werk ik aan zwakheden om kansen te pakken?</span><br /><br />
+                    <em style="font-size: 0.85em;">Voorbeeld: "Ik vind onzekerheid eng (W), maar moet leren werken zonder handleiding (O) → Kies voor case competition dit jaar"</em>
+                  </td>
+                  <td>
+                    <strong>WT-Strategieën: VERMIJDEN</strong><br />
+                    <span style="font-size: 0.9em;">Wat moet ik echt vermijden/veranderen?</span><br /><br />
+                    <em style="font-size: 0.85em;">Voorbeeld: "Te veel tijd aan routine (W) en AI neemt dit over (T) → Automatiseer studie met AI zodat ik meer tijd heb voor essays"</em>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 20px; font-size: 1em; font-weight: 600;">
+              Formuleer <strong>minstens 2 strategieën</strong> met <strong>concrete acties</strong>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+              Een goede actie is: <strong>Specifiek</strong> (niet 'beter worden in AI', maar 'volg cursus X'), <strong>Meetbaar</strong> ('dit semester'), <strong>Actionable</strong> (iets wat je echt kan doen)
+            </p>
+          </div>
+          <p style="font-size: 0.7em; margin-top: 15px;"><em><strong>Opdracht: 16 minuten individueel</strong></em></p>
+          <aside class="notes">
+            16 minuten individueel werk aan confrontatiematrix.
+
+            DOCENT-BEGELEIDING tijdens werken:
+            - Loop rond
+            - Help studenten die vastlopen: "Kijk naar je Opportunities - welke is het makkelijkst om NU te starten?"
+            - Moedig aan om ambitieus te zijn: "Jij kan dit - je hebt 4 jaar om te transformeren"
+
+            Denk aan: vakken kiezen, AI-tools leren, bestuurservaring, cases, stages, online cursussen, boeken lezen.
+
+            Na 16 min: Gallery Walk + Commitment (Slide 14, 12 min).
+          </aside>
+        </section>
+
+        <!-- PAUSE SLIDE 2 -->
+        <section data-background-color="#764ba2" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">
+          <div style="color: white; text-align: center;">
+            <h1 style="font-size: 3em; margin-bottom: 30px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.4);">☕ PAUZE</h1>
+            <p style="font-size: 1.5em; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">15 minuten</p>
+            <p style="font-size: 1em; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">We starten om [TIJD] met Blok 3: Transformatie</p>
+          </div>
+          <aside class="notes">
+            15 minuten pauze na Blok 2 (Inzicht). Studenten hebben nu:
+            - Urgentie gevoeld (AI demo, bijbaan is kwetsbaar)
+            - Inzicht gekregen (Bol.com, Genius Curve, bijbaan→bedrijfskundige transformatie)
+            - Zelfanalyse gedaan (SWOT, trio-discussie, confrontatiematrix)
+
+            Na pauze: Transformatie - Gallery Walk, Commitment, Post-Poll, Synthese, Feedback.
+          </aside>
+        </section>
+
+        <!-- Slide 14: Gallery Walk + Commitment -->
+        <section>
+          <h2>Gallery Walk + Jouw Commitment</h2>
+          <div class="box" style="font-size: 0.8em;">
+            <div style="background: rgba(8, 61, 119, 0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <p style="font-weight: 600; margin-bottom: 10px;">DEEL A: Gallery Walk (7 min)</p>
+              <ol style="font-size: 0.95em;">
+                <li>Hang je confrontatiematrix op (1 min)</li>
+                <li>Loop rond, lees minstens 5 andere matrices (5 min)</li>
+                <li>Plak post-it met feedback/inspiratie (1 min):</li>
+              </ol>
+              <ul style="margin-left: 40px; margin-top: 10px; font-size: 0.9em;">
+                <li>💡 "Inspiratie: [wat ik van jou ga kopiëren]"</li>
+                <li>🎯 "Tip: [concreet advies]"</li>
+                <li>⭐ "Top: [wat ik sterk vind]"</li>
+              </ul>
+            </div>
+
+            <div style="background: rgba(76, 175, 80, 0.05); padding: 20px; border-radius: 8px;">
+              <p style="font-weight: 600; margin-bottom: 10px;">DEEL B: Persoonlijke Commitment (5 min)</p>
+              <p style="margin-bottom: 15px;">Kies <strong>ÉÉN actie</strong> uit je confrontatiematrix die je de komende <strong>2 weken</strong> gaat uitvoeren:</p>
+              <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid var(--r-heading-color);">
+                <p style="font-weight: 600; font-size: 0.95em;">Mijn commitment voor de volgende periode:</p>
+                <p style="margin-top: 10px; font-size: 0.9em;">
+                  <strong>WAT:</strong> [concrete actie]<br />
+                  <em>Bijvoorbeeld: "Ik meld me aan voor de case competition van volgende maand"</em>
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em;">
+                  <strong>WANNEER:</strong> [deadline]<br />
+                  <em>Bijvoorbeeld: "Voor vrijdag 25 oktober"</em>
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em;">
+                  <strong>HOE MEET IK SUCCES:</strong> [meetbaar resultaat]<br />
+                  <em>Bijvoorbeeld: "Inschrijving bevestigd + teamleden gevonden"</em>
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            12 minuten totaal: 7 min Gallery Walk + 5 min Commitment.
+
+            DEEL A: Gallery Walk (7 min)
+            Creëer veilige, nieuwsgierige sfeer. Moedig aan: "Zoek iemand met een heel andere aanpak dan jij - wat kun je leren?"
+            Model gedrag: loop zelf rond, plak een post-it, laat zien hoe.
+
+            DEEL B: Commitment (5 min)
+            "Je hebt net gezien: iedereen heeft goede ideeën. Maar ideeën zijn niks zonder actie.
+            Kies ÉÉN actie uit je confrontatiematrix die je de komende 2 weken gaat uitvoeren.
+            Maak het klein genoeg om te lukken, groot genoeg om verschil te maken."
+
+            Optioneel (als tijd): 3 studenten laten delen wat hun commitment is (1 min totaal).
+
+            Motivatie: Agency (eigen keuze) + Commitment (publiek maken verhoogt follow-through).
+          </aside>
+        </section>
+
+        <!-- Slide 15: Post-Poll -->
+        <section id="poll-post-slide">
+          <h2>Jouw Verwachting Nu</h2>
+          <div class="poll-container">
+            <div class="poll-question">
+              Als ik over een paar jaar start als bedrijfskundige, dan is AI in mijn dagelijks werk...
+            </div>
+            <div class="poll-options" id="post-poll-options">
+              <div class="poll-option" data-option="a" onclick="vote('post', 'a')">
+                <span class="poll-option-label">A. Mijn assistent</span>
+                <span class="poll-option-text">Het neemt routine-werk over, ik focus op strategie en complexiteit</span>
+              </div>
+              <div class="poll-option" data-option="b" onclick="vote('post', 'b')">
+                <span class="poll-option-label">B. Mijn gereedschap</span>
+                <span class="poll-option-text">Ik gebruik het actief als tool, maar bepaal zelf wat en hoe</span>
+              </div>
+              <div class="poll-option" data-option="c" onclick="vote('post', 'c')">
+                <span class="poll-option-label">C. Mijn concurrent</span>
+                <span class="poll-option-text">Het bedreigt mijn werk, ik moet constant bijblijven om relevant te blijven</span>
+              </div>
+              <div class="poll-option" data-option="d" onclick="vote('post', 'd')">
+                <span class="poll-option-label">D. Minimaal aanwezig</span>
+                <span class="poll-option-text">Bedrijfskundig werk vraagt vooral menselijke skills die AI niet heeft</span>
+              </div>
+            </div>
+            <div class="poll-results" id="post-poll-results" style="display: none;">
+              <!-- Results will be injected here -->
+            </div>
+            <div class="poll-controls">
+              <button onclick="showResults('post')">Toon Resultaten</button>
+              <button onclick="resetPoll('post')" class="reset-button" style="background: #dc3545; border-color: #dc3545;">Reset</button>
+            </div>
+          </div>
+          <aside class="notes">
+            3 minuten. Laat studenten opnieuw stemmen. Toon resultaten.
+          </aside>
+        </section>
+
+        <!-- Slide 15B: Pre/Post Poll Vergelijking -->
+        <section id="poll-comparison-slide">
+          <h2>📊 Voor vs Na: Jouw AI-Perspectief</h2>
+          <div class="box" style="font-size: 0.7em; max-width: 95%; margin: 0 auto;">
+            <div id="comparison-container-dedicated">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                <div style="background: rgba(244, 67, 54, 0.05); padding: 15px; border-radius: 8px; border: 2px solid rgba(244, 67, 54, 0.3);">
+                  <h4 style="text-align: center; margin-bottom: 15px; color: var(--r-heading-color);">Voor vandaag</h4>
+                  <div id="comparison-pre-dedicated"></div>
+                </div>
+                <div style="background: rgba(76, 175, 80, 0.05); padding: 15px; border-radius: 8px; border: 2px solid rgba(76, 175, 80, 0.5);">
+                  <h4 style="text-align: center; margin-bottom: 15px; color: var(--r-heading-color);">Na vandaag</h4>
+                  <div id="comparison-post-dedicated"></div>
+                </div>
+              </div>
+            </div>
+            <div class="poll-controls" style="margin-top: 20px;">
+              <button onclick="showComparisonDedicated()">Vergelijk Pre/Post</button>
+              <button onclick="exportCSV()">Download Data (CSV)</button>
+            </div>
+          </div>
+          <aside class="notes">
+            2 minuten. Toon vergelijking.
+            "Kijk naar de verschuiving van C/D naar A/B. Dit is precies het doel: van angst/onderschatting naar realistische samenwerking.
+            AI is niet je concurrent - het is je gereedschap om genius-werk te doen."
+          </aside>
+        </section>
+
+        <!-- Slide 16: Synthese - Van Bijbaan naar Bedrijfskundige -->
+        <section>
+          <h2>✨ Synthese: Van Bijbaan naar Bedrijfskundige</h2>
+          <div class="box" style="font-size: 0.54em;">
+            <p style="font-weight: 600; margin-bottom: 8px;"><strong>Week 1:</strong> Bedrijfskundig Denken = Systeem 2 + Modellen + Context</p>
+
+            <div style="background: rgba(8, 61, 119, 0.03); padding: 10px; border-radius: 6px; margin: 10px 0;">
+              <p style="font-weight: 600; font-size: 1.05em; text-align: center; margin-bottom: 8px; color: var(--r-heading-color);">De Transformatie</p>
+
+              <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin: 8px 0;">
+                <div style="background: rgba(244, 67, 54, 0.05); padding: 8px; border-radius: 6px; border: 2px solid rgba(244, 67, 54, 0.3);">
+                  <p style="font-weight: 600; text-align: center; margin-bottom: 6px; font-size: 1.05em;">NU (bijbaan)</p>
+                  <ul style="font-size: 0.95em; list-style: none; padding-left: 0; line-height: 1.5;">
+                    <li>📘 80% Region 2</li>
+                    <li>📝 Toepassen</li>
+                    <li>👣 Volgen</li>
+                    <li>🤖 AI vervangt</li>
+                  </ul>
+                </div>
+
+                <div style="font-size: 1.6em; color: var(--r-heading-color);">→</div>
+
+                <div style="background: rgba(76, 175, 80, 0.05); padding: 8px; border-radius: 6px; border: 2px solid rgba(76, 175, 80, 0.5);">
+                  <p style="font-weight: 600; text-align: center; margin-bottom: 6px; font-size: 1.05em;">OVER 4 JAAR (HBO)</p>
+                  <ul style="font-size: 0.95em; list-style: none; padding-left: 0; line-height: 1.5;">
+                    <li>📕 &lt;20% Region 2</li>
+                    <li>🎨 Ontwerpen</li>
+                    <li>🧭 Beslissen</li>
+                    <li>🤝 AI samenwerken</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: rgba(8, 61, 119, 0.08); padding: 10px; border-radius: 6px; border-left: 3px solid var(--r-heading-color);">
+              <p style="font-weight: 600; margin-bottom: 5px;">Jouw transformatie-formule:</p>
+              <p style="font-size: 0.92em; line-height: 1.35;">
+                <strong>Toekomstbestendige Bedrijfskundige</strong> =<br />
+                <span style="margin-left: 10px;">• Systeem 2 + Modellen + Context</span><br />
+                <span style="margin-left: 10px;">+ <strong>AI als samenwerkingspartner</strong>:</span><br />
+                <span style="margin-left: 20px;">→ JIJ: Aanwijzingen, kwaliteitsbeoordeling, beslissingen</span><br />
+                <span style="margin-left: 20px;">→ AI: Onderzoek, analyse, simulaties uitvoeren</span>
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            3 minuten. Kernboodschap:
+
+            "Laten we afsluiten met de kernboodschap:
+
+            Je huidige bijbaan is 80% Region 2. Dat is oké. Bijbanen zijn zo ontworpen. Maar dat is niet je toekomst.
+
+            Over 4 jaar, als HBO-bedrijfskundige, moet je &lt;20% Region 2 doen. De rest is Region 1/3: strategie, creativiteit, ethiek, complexiteit.
+
+            Wat betekent dat concreet?
+            - Week 1 leerde je: Bedrijfskundig Denken = Systeem 2 + Modellen + Context.
+            - Vandaag hebben we daar AI aan toegevoegd.
+
+            Maar de transformatie is dieper:
+            - Van Toepassen naar Ontwerpen: Nu pas je SWOT toe. Straks ONTWERP je: is SWOT relevant?
+            - Van Volgen naar Beslissen: Nu volg je procedures. Straks BESLIS je: welke procedure maken we?
+            - Van AI als Concurrent naar AI als Tool: AI is geen bedreiging. Het is een tool die routine overneemt zodat JIJ tijd hebt voor strategie.
+
+            En hier is het cruciale punt: Een HBO-diploma is GEEN garantie voor Region 1/3 werk. Je kan 4 jaar studeren en alsnog in Region 2 blijven hangen.
+
+            De transformatie moet je ZELF maken. Door:
+            - Vakken te kiezen die R1/3 trainen (Analyse, Evaluatie, Creëren - Bloom's Taxonomy)
+            - Cases te doen zonder handleiding
+            - Bestuurservaring op te doen
+            - AI-tools te leren zodat je routine kunt automatiseren
+            - En vooral: onzekerheid te accepteren. Want R1/3 werk = geen handleiding.
+
+            Jullie hebben 4 jaar. Gebruik ze wijs. Start vandaag met dat commitment dat je net opschreef.
+
+            Over 4 jaar is AI veel beter dan nu. Alles wat NU nog menselijk lijkt in Region 2, is dan geautomatiseerd. Je toekomst ligt in Region 1/3. Nowhere else."
+          </aside>
+        </section>
+
+        <!-- Slide 17: Feedback -->
+        <section>
+          <h3>Feedback & Volgende Stappen</h3>
+          <p>Scan de QR-code voor feedback</p>
+          <div class="qr-code">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://hanbedrijfskunde.github.io/retrospective/?workshop=Strategisch%20Mgmt%20WK6"
+              alt="QR Code voor de survey"
+            />
+          </div>
+          <aside class="notes">
+            "Houd je commitment bij - we komen hier in een volgende module op terug. Veel succes met jullie ontwikkeling tot Genius Bedrijfskundige!"
+          </aside>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        center: true,
+        transition: "fade",
+        plugins: [RevealNotes],
+      });
+
+      // Check if docent mode is enabled via query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const isDocent = urlParams.get('docent') === 'true';
+
+      // Poll Logic - Google Sheets Backend
+      const APPS_SCRIPT_ID = 'AKfycbzx58HIJIt1xm3iV3xMh6TEUFAwNLxhLr3Li3wz3CFnlZ4JP2_E8Wzkcs-yhTrKiGgKSA';
+      const APPS_SCRIPT_URL = `https://script.google.com/macros/s/${APPS_SCRIPT_ID}/exec`;
+
+      // Hide/show reset buttons based on docent mode
+      document.addEventListener('DOMContentLoaded', () => {
+        const resetButtons = document.querySelectorAll('.reset-button');
+        resetButtons.forEach(button => {
+          button.style.display = isDocent ? 'inline-block' : 'none';
+        });
+      });
+
+      async function vote(pollType, option) {
+        try {
+          // Visual feedback immediately
+          const container = document.getElementById(`${pollType}-poll-options`);
+          container.querySelectorAll('.poll-option').forEach(el => {
+            el.classList.remove('voted');
+            el.style.opacity = '0.5';
+          });
+          const selectedOption = container.querySelector(`[data-option="${option}"]`);
+          selectedOption.classList.add('voted');
+          selectedOption.style.opacity = '1';
+
+          // Send vote to Google Sheets
+          const response = await fetch(`${APPS_SCRIPT_URL}?poll=${pollType}&option=${option}`, {
+            method: 'POST',
+            redirect: 'follow'
+          });
+
+          const data = await response.json();
+
+          if (data.error) {
+            throw new Error(data.message || data.error);
+          }
+
+          // Reset opacity
+          container.querySelectorAll('.poll-option').forEach(el => {
+            el.style.opacity = '1';
+          });
+
+          // Auto-show results after voting
+          setTimeout(() => showResults(pollType), 500);
+
+        } catch (error) {
+          console.error('Vote failed:', error);
+          alert(`Stemmen mislukt: ${error.message}\n\nControleer internetverbinding.`);
+
+          // Reset visual state
+          const container = document.getElementById(`${pollType}-poll-options`);
+          container.querySelectorAll('.poll-option').forEach(el => {
+            el.classList.remove('voted');
+            el.style.opacity = '1';
+          });
+        }
+      }
+
+      // Label mappings voor routine polls
+      const routine1Labels = {
+        a: 'A: 0-30%',
+        b: 'B: 30-60%',
+        c: 'C: 60-90%',
+        d: 'D: 90-100%'
+      };
+
+      const routine2Labels = {
+        a: 'A: <10% (Vooral strategie/creativiteit)',
+        b: 'B: 10-30% (Mix, maar vooral denken)',
+        c: 'C: 30-60% (Evenwichtige mix)',
+        d: 'D: >60% (Routine werk is prima)'
+      };
+
+      async function showResults(pollType) {
+        const options = ['a', 'b', 'c', 'd'];
+
+        // Dynamic label selection
+        const labels =
+          pollType === 'pre' || pollType === 'post' ? {
+            a: 'A. Mijn assistent',
+            b: 'B. Mijn gereedschap',
+            c: 'C. Mijn concurrent',
+            d: 'D. Minimaal aanwezig'
+          } :
+          pollType === 'routine1' ? routine1Labels :
+          pollType === 'routine2' ? routine2Labels :
+          {}; // fallback
+
+        try {
+          // Fetch results from Google Sheets
+          const response = await fetch(`${APPS_SCRIPT_URL}?poll=${pollType}`, {
+            method: 'GET',
+            redirect: 'follow'
+          });
+
+          const data = await response.json();
+
+          if (data.error) {
+            throw new Error(data.message || data.error);
+          }
+
+          // Convert data to counts
+          const counts = {};
+          let total = 0;
+          options.forEach(opt => {
+            const key = `${pollType}-${opt}`;
+            counts[opt] = data[key] || 0;
+            total += counts[opt];
+          });
+
+          // Generate HTML (compact mode for routine polls)
+          const isRoutinePoll = pollType === 'routine1' || pollType === 'routine2';
+          let html = '';
+          options.forEach(opt => {
+            const percentage = total > 0 ? Math.round((counts[opt] / total) * 100) : 0;
+
+            // Compact HTML for routine polls (percentage only)
+            if (isRoutinePoll) {
+              html += `
+                <div class="poll-result-item">
+                  <div class="poll-result-label">
+                    <span>${labels[opt]}</span>
+                    <span>${percentage}%</span>
+                  </div>
+                  <div class="poll-result-bar-container">
+                    <div class="poll-result-bar option-${opt}" style="width: ${percentage}%">
+                      ${percentage > 15 ? percentage + '%' : ''}
+                    </div>
+                  </div>
+                </div>
+              `;
+            } else {
+              // Standard HTML for pre/post polls
+              html += `
+                <div class="poll-result-item">
+                  <div class="poll-result-label">
+                    <span>${labels[opt]}</span>
+                    <span>${counts[opt]} stemmen (${percentage}%)</span>
+                  </div>
+                  <div class="poll-result-bar-container">
+                    <div class="poll-result-bar option-${opt}" style="width: ${percentage}%">
+                      ${percentage > 10 ? percentage + '%' : ''}
+                    </div>
+                  </div>
+                </div>
+              `;
+            }
+          });
+
+          const resultsDiv = document.getElementById(`${pollType}-poll-results`);
+          resultsDiv.innerHTML = html;
+          resultsDiv.style.display = 'block';
+
+        } catch (error) {
+          console.error('Show results failed:', error);
+          const resultsDiv = document.getElementById(`${pollType}-poll-results`);
+          resultsDiv.innerHTML = `<p style="color: red;">Fout bij ophalen resultaten: ${error.message}</p>`;
+          resultsDiv.style.display = 'block';
+        }
+      }
+
+      function showComparison() {
+        showResults('pre');
+        showResults('post');
+
+        const comparisonDiv = document.getElementById('comparison-container');
+        comparisonDiv.style.display = 'block';
+
+        // Clone results into comparison columns
+        const preResults = document.getElementById('pre-poll-results').innerHTML;
+        const postResults = document.getElementById('post-poll-results').innerHTML;
+
+        document.getElementById('comparison-pre').innerHTML = preResults;
+        document.getElementById('comparison-post').innerHTML = postResults;
+      }
+
+      async function showComparisonDedicated() {
+        const options = ['a', 'b', 'c', 'd'];
+        const labels = {
+          a: 'A. Mijn assistent',
+          b: 'B. Mijn gereedschap',
+          c: 'C. Mijn concurrent',
+          d: 'D. Minimaal aanwezig'
+        };
+
+        try {
+          // Fetch both poll results
+          const [preResponse, postResponse] = await Promise.all([
+            fetch(`${APPS_SCRIPT_URL}?poll=pre&action=results`),
+            fetch(`${APPS_SCRIPT_URL}?poll=post&action=results`)
+          ]);
+
+          const preData = await preResponse.json();
+          const postData = await postResponse.json();
+
+          // Calculate totals
+          const preTotal = options.reduce((sum, opt) => sum + (preData[`pre-${opt}`] || 0), 0);
+          const postTotal = options.reduce((sum, opt) => sum + (postData[`post-${opt}`] || 0), 0);
+
+          // Generate HTML for pre results
+          let preHTML = '';
+          options.forEach(opt => {
+            const count = preData[`pre-${opt}`] || 0;
+            const percentage = preTotal > 0 ? Math.round((count / preTotal) * 100) : 0;
+            preHTML += `
+              <div class="poll-result-item" style="margin-bottom: 10px;">
+                <div class="poll-result-label" style="font-size: 0.85em;">
+                  <span>${labels[opt]}</span>
+                  <span>${count} (${percentage}%)</span>
+                </div>
+                <div class="poll-result-bar-container" style="height: 18px;">
+                  <div class="poll-result-bar option-${opt}" style="width: ${percentage}%">
+                    ${percentage > 10 ? percentage + '%' : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+
+          // Generate HTML for post results
+          let postHTML = '';
+          options.forEach(opt => {
+            const count = postData[`post-${opt}`] || 0;
+            const percentage = postTotal > 0 ? Math.round((count / postTotal) * 100) : 0;
+            const preCount = preData[`pre-${opt}`] || 0;
+            const prePercentage = preTotal > 0 ? Math.round((preCount / preTotal) * 100) : 0;
+            const delta = percentage - prePercentage;
+            const deltaSymbol = delta > 0 ? '↑' : delta < 0 ? '↓' : '→';
+            const deltaColor = delta > 0 ? '#4caf50' : delta < 0 ? '#f44336' : '#999';
+
+            postHTML += `
+              <div class="poll-result-item" style="margin-bottom: 10px;">
+                <div class="poll-result-label" style="font-size: 0.85em;">
+                  <span>${labels[opt]}</span>
+                  <span>${count} (${percentage}%) <span style="color: ${deltaColor}; font-weight: 600;">${deltaSymbol}${Math.abs(delta)}%</span></span>
+                </div>
+                <div class="poll-result-bar-container" style="height: 18px;">
+                  <div class="poll-result-bar option-${opt}" style="width: ${percentage}%">
+                    ${percentage > 10 ? percentage + '%' : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+
+          document.getElementById('comparison-pre-dedicated').innerHTML = preHTML;
+          document.getElementById('comparison-post-dedicated').innerHTML = postHTML;
+
+        } catch (error) {
+          console.error('Comparison failed:', error);
+          document.getElementById('comparison-pre-dedicated').innerHTML = `<p style="color: red;">Fout bij vergelijking: ${error.message}</p>`;
+        }
+      }
+
+      async function resetPoll(pollType) {
+        if (!confirm('Weet je zeker dat je de poll wilt resetten?')) return;
+
+        try {
+          // Reset via Google Sheets API
+          const response = await fetch(`${APPS_SCRIPT_URL}?poll=${pollType}&action=reset`, {
+            method: 'GET',
+            redirect: 'follow'
+          });
+
+          const data = await response.json();
+
+          if (data.error) {
+            throw new Error(data.message || data.error);
+          }
+
+          // Clear visual state
+          const container = document.getElementById(`${pollType}-poll-options`);
+          if (container) {
+            container.querySelectorAll('.poll-option').forEach(el => {
+              el.classList.remove('voted');
+            });
+          }
+
+          const resultsDiv = document.getElementById(`${pollType}-poll-results`);
+          if (resultsDiv) {
+            resultsDiv.innerHTML = '';
+            resultsDiv.style.display = 'none';
+          }
+
+          alert('Poll gereset!');
+
+        } catch (error) {
+          console.error('Reset failed:', error);
+          alert(`Reset mislukt: ${error.message}`);
+        }
+      }
+
+      // Keyboard shortcut for reset all (R key)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'R' && e.shiftKey) {
+          if (confirm('Reset BEIDE polls (pre en post)?')) {
+            resetPoll('pre');
+            resetPoll('post');
+            document.getElementById('comparison-container').style.display = 'none';
+          }
+        }
+      });
+
+      // Export to CSV
+      async function exportResults() {
+        try {
+          const options = ['a', 'b', 'c', 'd'];
+          let csv = 'Option,Pre Count,Post Count\n';
+
+          // Fetch both polls
+          const preResponse = await fetch(`${APPS_SCRIPT_URL}?poll=pre`, { method: 'GET', redirect: 'follow' });
+          const preData = await preResponse.json();
+
+          const postResponse = await fetch(`${APPS_SCRIPT_URL}?poll=post`, { method: 'GET', redirect: 'follow' });
+          const postData = await postResponse.json();
+
+          options.forEach(opt => {
+            const preCount = preData[`pre-${opt}`] || 0;
+            const postCount = postData[`post-${opt}`] || 0;
+            csv += `${opt},${preCount},${postCount}\n`;
+          });
+
+          const blob = new Blob([csv], { type: 'text/csv' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'poll-results-week6.csv';
+          a.click();
+
+        } catch (error) {
+          console.error('Export failed:', error);
+          alert(`Export mislukt: ${error.message}`);
+        }
+      }
+
+      // Auto-refresh results when slide becomes visible (for live updates during class)
+      Reveal.on('slidechanged', (event) => {
+        const slideId = event.currentSlide.id;
+        if (slideId === 'poll-pre-slide' || slideId === 'poll-post-slide') {
+          const pollType = slideId.includes('pre') ? 'pre' : 'post';
+          setTimeout(() => showResults(pollType), 500);
+        }
+      });
+    </script>
+  </body>
+</html>

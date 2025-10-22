@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bol.com Logistiek Kennisdomein</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: transparent;
+      overflow: hidden;
+    }
+    #p5-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="p5-container"></div>
+
+  <script>
+    let animationProgress = 0;
+    const LAYOUT = {
+      width: 0,
+      height: 0,
+      timelineY: 0.28,
+      marginX: 0.1,
+      titleY: 0.08,
+      x0BoxTop: 0.14,
+      x0BoxHeight: 0.09,
+      timelineLabelY: 0.31,
+      pointLabelTopY: 0.36,
+      region2BracketY: 0.50,
+      region2LabelY: 0.53,
+      region13BoxesY: 0.65,
+      region13BoxHeight: 0.16,
+      bottomBoxY: 0.90,
+      bottomBoxHeight: 0.09,
+      x0: 0.5,
+      x15: 0.15,
+      x35: 0.35,
+      x65: 0.65,
+      x85: 0.85,
+      q: 0.15,
+    };
+
+    function setup() {
+      let cnv = createCanvas(windowWidth, windowHeight);
+      cnv.parent('p5-container');
+      textFont('Inter');
+      frameRate(60);
+      LAYOUT.width = width;
+      LAYOUT.height = height;
+    }
+
+    // Helper function to draw text with white background
+    function textWithBackground(txt, x, y, textColor, bgPadding = 8) {
+      push();
+      const txtWidth = textWidth(txt);
+      const txtSize = textSize();
+
+      // Draw white background (fully opaque to prevent artifacts)
+      fill(255, 255, 255, 255);
+      noStroke();
+      rectMode(CENTER);
+      rect(x, y - txtSize * 0.12, txtWidth + bgPadding * 2, txtSize + bgPadding, 5);
+
+      // Draw text
+      fill(textColor);
+      noStroke();
+      textAlign(CENTER, CENTER);
+      text(txt, x, y);
+      pop();
+    }
+
+    function draw() {
+      clear();
+
+      if (animationProgress < 1) {
+        animationProgress += 0.015;
+      }
+
+      const w = width;
+      const h = height;
+      const margin = w * LAYOUT.marginX;
+      const lineStartX = margin;
+      const lineEndX = w - margin;
+      const lineLength = lineEndX - lineStartX;
+      const lineY = h * LAYOUT.timelineY;
+
+      function fracToX(frac) {
+        return lineStartX + lineLength * frac;
+      }
+
+      // Title removed per user request
+
+      // === MAIN HORIZONTAL LINE ===
+      if (animationProgress > 0.1) {
+        push();
+        stroke(8, 61, 119);
+        strokeWeight(3);
+        const currentLineEnd = lerp(lineStartX, lineEndX, Math.min((animationProgress - 0.1) / 0.2, 1));
+        line(lineStartX, lineY, currentLineEnd, lineY);
+
+        const arrowSize = 12;
+        if (animationProgress > 0.3) {
+          fill(8, 61, 119);
+          triangle(lineStartX, lineY, lineStartX + arrowSize, lineY - arrowSize/2, lineStartX + arrowSize, lineY + arrowSize/2);
+          triangle(lineEndX, lineY, lineEndX - arrowSize, lineY - arrowSize/2, lineEndX - arrowSize, lineY + arrowSize/2);
+        }
+        pop();
+      }
+
+      // === AXIS LABELS ===
+      if (animationProgress > 0.3) {
+        const x0Pos = fracToX(LAYOUT.x0);
+
+        push();
+        textAlign(CENTER, TOP);
+        textSize(w * 0.020);
+        fill(8, 61, 119);
+        textStyle(BOLD);
+        text("0", lineStartX, h * LAYOUT.timelineLabelY);
+        text("0.5 (x₀)", x0Pos, h * LAYOUT.timelineLabelY);
+        text("1", lineEndX, h * LAYOUT.timelineLabelY);
+        pop();
+      }
+
+      // === X0 BOX (SAME-DAY DELIVERY ALGORITME) ===
+      if (animationProgress > 0.4) {
+        const x0Pos = fracToX(LAYOUT.x0);
+        const boxW = Math.min(w * 0.26, 300);
+        const boxH = h * LAYOUT.x0BoxHeight;
+        const boxY = h * LAYOUT.x0BoxTop;
+
+        push();
+        fill(76, 175, 80, 40);
+        stroke(76, 175, 80);
+        strokeWeight(2.5);
+        rectMode(CENTER);
+        rect(x0Pos, boxY + boxH/2, boxW, boxH, 6);
+
+        fill(76, 175, 80);
+        noStroke();
+        textAlign(CENTER, CENTER);
+        textSize(w * 0.018);
+        textStyle(BOLD);
+        // Better line spacing
+        const lineSpacing = w * 0.015; // ~21px spacing
+        let yPos = boxY + boxH * 0.25;
+        text('"SAME-DAY DELIVERY', x0Pos, yPos);
+        yPos += lineSpacing;
+        text('ALGORITME"', x0Pos, yPos);
+        yPos += lineSpacing;
+        textSize(w * 0.016);
+        textStyle(NORMAL);
+        text('(BESTAANDE KENNIS!)', x0Pos, yPos);
+        pop();
+
+        // Vertical line at x₀
+        push();
+        stroke(76, 175, 80);
+        strokeWeight(3);
+        line(x0Pos, boxY + boxH, x0Pos, h * LAYOUT.region2BracketY);
+        pop();
+      }
+
+      // === REGION 2 POINTS ===
+      if (animationProgress > 0.5) {
+        const pos35 = fracToX(LAYOUT.x35);
+        const pos50 = fracToX(LAYOUT.x0);
+        const pos65 = fracToX(LAYOUT.x65);
+
+        push();
+        fill(100, 149, 237);
+        noStroke();
+        const dotSize = 10;
+        circle(pos35, lineY, dotSize);
+        circle(pos50, lineY, dotSize);
+        circle(pos65, lineY, dotSize);
+        pop();
+
+        // Labels above with white background
+        push();
+        textSize(w * 0.013);
+        textStyle(BOLD);
+        const labelAboveY = lineY - 8;
+        textAlign(CENTER, BOTTOM);
+
+        const blueColor = color(100, 149, 237);
+        textWithBackground("0.35", pos35, labelAboveY - 10, blueColor, 6);
+        textWithBackground("0.5", pos50, labelAboveY - 10, blueColor, 6);
+        textWithBackground("0.65", pos65, labelAboveY - 10, blueColor, 6);
+        pop();
+
+        // Labels below with white backgrounds
+        push();
+        textSize(w * 0.015);
+        const labelBelowY = h * LAYOUT.pointLabelTopY;
+        const lineSpacing = w * 0.018; // ~25px spacing to prevent overlap
+        const labelColor = color(100, 149, 237);
+
+        textStyle(NORMAL);
+        // Position 0.35
+        textWithBackground('"Route 10%', pos35, labelBelowY, labelColor, 8);
+        textWithBackground('efficiënter"', pos35, labelBelowY + lineSpacing, labelColor, 8);
+        textWithBackground('📙 (Optimalisatie)', pos35, labelBelowY + lineSpacing * 2, labelColor, 8);
+
+        // Position 0.5
+        textWithBackground('"Huidige', pos50, labelBelowY, labelColor, 8);
+        textWithBackground('algoritme"', pos50, labelBelowY + lineSpacing, labelColor, 8);
+        textWithBackground('📘 (Werkt!)', pos50, labelBelowY + lineSpacing * 2, labelColor, 8);
+
+        // Position 0.65
+        textWithBackground('"Drone delivery', pos65, labelBelowY, labelColor, 8);
+        textWithBackground('testen"', pos65, labelBelowY + lineSpacing, labelColor, 8);
+        textWithBackground('📙 (Uitbreiding)', pos65, labelBelowY + lineSpacing * 2, labelColor, 8);
+        pop();
+      }
+
+      // === REGION 2 BRACKET ===
+      if (animationProgress > 0.6) {
+        const region2Start = fracToX(LAYOUT.x0 - LAYOUT.q);
+        const region2End = fracToX(LAYOUT.x0 + LAYOUT.q);
+        const bracketY = h * LAYOUT.region2BracketY;
+        const bracketH = 15;
+
+        push();
+        stroke(100, 149, 237);
+        strokeWeight(2);
+        noFill();
+        line(region2Start, bracketY, region2Start, bracketY - bracketH);
+        line(region2Start, bracketY, region2End, bracketY);
+        line(region2End, bracketY, region2End, bracketY - bracketH);
+        pop();
+
+        // Region 2 label with white background
+        push();
+        textSize(w * 0.016);
+        textStyle(BOLD);
+        const labelY = h * LAYOUT.region2LabelY;
+        textWithBackground("📙 Region 2 (Comfort zone - bestaande kennis werkt)",
+                          (region2Start + region2End)/2, labelY, color(100, 149, 237), 10);
+        pop();
+      }
+
+      // === REGION 1 & 3 POINTS AND BOXES ===
+      if (animationProgress > 0.7) {
+        const pos15 = fracToX(LAYOUT.x15);
+        const pos85 = fracToX(LAYOUT.x85);
+
+        // Draw circles
+        push();
+        fill(244, 67, 54);
+        noStroke();
+        circle(pos15, lineY, 10);
+        circle(pos85, lineY, 10);
+        pop();
+
+        // Labels above with white background
+        push();
+        textSize(w * 0.013);
+        textStyle(BOLD);
+        const redColor = color(244, 67, 54);
+        textWithBackground("0.15", pos15, lineY - 18, redColor, 6);
+        textWithBackground("0.85", pos85, lineY - 18, redColor, 6);
+        pop();
+
+        // Boxes
+        const geniusBoxW = Math.min(w * 0.20, 240);
+        const geniusBoxH = h * LAYOUT.region13BoxHeight;
+        const geniusBoxY = h * LAYOUT.region13BoxesY;
+
+        // Region 1 box (Quantum)
+        push();
+        fill(244, 67, 54, 30);
+        stroke(244, 67, 54);
+        strokeWeight(2);
+        rectMode(CENTER);
+        rect(pos15, geniusBoxY, geniusBoxW, geniusBoxH, 6);
+
+        fill(244, 67, 54);
+        noStroke();
+        textAlign(CENTER, CENTER);
+        textSize(w * 0.018);
+        textStyle(BOLD);
+        text('📕 Region 1', pos15, geniusBoxY - geniusBoxH * 0.35);
+        textStyle(NORMAL);
+        textSize(w * 0.015);
+        text('Genius nodig', pos15, geniusBoxY - geniusBoxH * 0.15);
+        text('(Totaal nieuwe tech)', pos15, geniusBoxY);
+        textSize(w * 0.015);
+        text('"Quantum computing', pos15, geniusBoxY + geniusBoxH * 0.15);
+        text('voor route-', pos15, geniusBoxY + geniusBoxH * 0.28);
+        text('optimalisatie"', pos15, geniusBoxY + geniusBoxH * 0.41);
+        pop();
+
+        // Region 3 box (Mars)
+        push();
+        fill(244, 67, 54, 30);
+        stroke(244, 67, 54);
+        strokeWeight(2);
+        rectMode(CENTER);
+        rect(pos85, geniusBoxY, geniusBoxW, geniusBoxH, 6);
+
+        fill(244, 67, 54);
+        noStroke();
+        textAlign(CENTER, CENTER);
+        textSize(w * 0.018);
+        textStyle(BOLD);
+        text('📕 Region 3', pos85, geniusBoxY - geniusBoxH * 0.35);
+        textStyle(NORMAL);
+        textSize(w * 0.015);
+        text('Genius nodig', pos85, geniusBoxY - geniusBoxH * 0.15);
+        text('(Totaal nieuwe context)', pos85, geniusBoxY);
+        textSize(w * 0.015);
+        text('"Mars-kolonie', pos85, geniusBoxY + geniusBoxH * 0.22);
+        text('leveringen"', pos85, geniusBoxY + geniusBoxH * 0.38);
+        pop();
+      }
+
+      // === BOTTOM WARNING BOX ===
+      if (animationProgress > 0.85) {
+        const msgBoxW = Math.min(w * 0.68, 800);
+        const msgBoxH = h * LAYOUT.bottomBoxHeight;
+        const msgBoxY = h * LAYOUT.bottomBoxY;
+
+        push();
+        fill(244, 67, 54, 20);
+        stroke(244, 67, 54);
+        strokeWeight(2.5);
+        rectMode(CENTER);
+        rect(w/2, msgBoxY, msgBoxW, msgBoxH, 6);
+
+        fill(244, 67, 54);
+        noStroke();
+        textAlign(CENTER, CENTER);
+
+        // Better line spacing for warning box
+        const lineSpacingBottom = w * 0.014; // Tighter spacing
+        let yPosBottom = msgBoxY - msgBoxH * 0.25;
+
+        textSize(w * 0.016);
+        textStyle(BOLD);
+        text('⚠️ Belangrijk:', w/2, yPosBottom);
+
+        yPosBottom += lineSpacingBottom;
+        fill(8, 61, 119);
+        textStyle(NORMAL);
+        textSize(w * 0.013);
+        text('De 0-1 lijn is NIET "verschillende bedrijfstakken".', w/2, yPosBottom);
+
+        yPosBottom += lineSpacingBottom;
+        textStyle(BOLD);
+        textSize(w * 0.014);
+        text('De 0-1 lijn is afstand van bekende kennis BINNEN één domein (logistiek).', w/2, yPosBottom);
+
+        yPosBottom += lineSpacingBottom;
+        textStyle(NORMAL);
+        textSize(w * 0.012);
+        fill(100);
+        text('Hoe verder van x₀, hoe meer nieuwe kennis je moet creëren.', w/2, yPosBottom);
+        pop();
+      }
+    }
+
+    function mousePressed() {
+      animationProgress = 0;
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+      LAYOUT.width = width;
+      LAYOUT.height = height;
+    }
+  </script>
+</body>
+</html>
