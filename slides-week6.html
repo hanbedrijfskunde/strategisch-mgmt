@@ -48,6 +48,18 @@
         from { width: 0%; }
       }
 
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-15px);
+        }
+        60% {
+          transform: translateY(-8px);
+        }
+      }
+
       .reveal {
         font-size: 32px;
         font-weight: 300;
@@ -1266,7 +1278,7 @@
 
         <!-- Slide 13: Confrontatiematrix - Jouw 4-jarenplan -->
         <section>
-          <h2>Confrontatiematrix - Jouw 4-jarenplan</h2>
+          <h2>Confrontatiematrix - Jouw 4-jarenplan <a href="https://claude.ai/public/artifacts/bc85ec1e-83d9-4c25-bbab-5784b187fa03" target="_blank" style="font-size: 0.8em; text-decoration: none; animation: bounce 2s infinite; display: inline-block; margin-left: 15px;" title="Curious? Click me! 🐱">🐱</a></h2>
           <div class="box" style="font-size: 0.7em;">
             <table class="matrix-table">
               <thead>
