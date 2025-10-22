@@ -526,7 +526,7 @@
           <div style="color: white; text-align: center;">
             <h1 style="font-size: 3em; margin-bottom: 30px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.4);">☕ PAUZE</h1>
             <p style="font-size: 1.5em; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">10 minuten</p>
-            <p style="font-size: 1em; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">We starten om [TIJD] met Blok 2: Inzicht</p>
+            <p style="font-size: 1em; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">We starten om <span id="block2-start-time">[TIJD]</span> met Blok 2: Inzicht</p>
           </div>
           <aside class="notes">
             10 minuten pauze na Blok 1 (Confrontatie). Studenten hebben nu urgentie gevoeld (AI demo + bijbaan sorteer-oefening).
@@ -874,36 +874,36 @@
 
         <!-- Slide 7E: Betekenis voor HBO Bedrijfskunde -->
         <section>
-          <h2 style="font-size: 1.05em; margin-bottom: 0.2em;">Wat betekent dit voor HBO Bedrijfskunde?</h2>
+          <h2 style="font-size: 1.05em; margin-bottom: 0.15em;">Wat betekent dit voor HBO Bedrijfskunde?</h2>
 
           <!-- Three implications in boxes -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 92%; margin: 12px auto;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 92%; margin: 8px auto;">
 
-            <div class="box" style="margin: 0; padding: 15px 18px; font-size: 0.58em;">
-              <div style="font-size: 2em; text-align: center; margin-bottom: 8px;">📊</div>
-              <h3 style="font-size: 1.1em; margin-bottom: 10px; color: var(--r-heading-color); text-align: center; line-height: 1.2;">Jouw rol als manager verandert</h3>
-              <ul style="font-size: 0.92em; line-height: 1.4; padding-left: 16px; margin: 0;">
-                <li style="margin-bottom: 6px;">Van "mensen aansturen" → "resources alloceren"</li>
-                <li style="margin-bottom: 6px;">Resources = mensen ÉN AI</li>
+            <div class="box" style="margin: 0; padding: 12px 15px; font-size: 0.56em;">
+              <div style="font-size: 1.9em; text-align: center; margin-bottom: 6px;">📊</div>
+              <h3 style="font-size: 1.08em; margin-bottom: 8px; color: var(--r-heading-color); text-align: center; line-height: 1.15;">Jouw rol als manager verandert</h3>
+              <ul style="font-size: 0.9em; line-height: 1.3; padding-left: 16px; margin: 0;">
+                <li style="margin-bottom: 5px;">Van "mensen aansturen" → "resources alloceren"</li>
+                <li style="margin-bottom: 5px;">Resources = mensen ÉN AI</li>
                 <li>Kernvraag: "Wie/wat heeft voordeel?"</li>
               </ul>
             </div>
 
-            <div class="box" style="margin: 0; padding: 15px 18px; font-size: 0.58em;">
-              <div style="font-size: 2em; text-align: center; margin-bottom: 8px;">⚠️</div>
-              <h3 style="font-size: 1.1em; margin-bottom: 10px; color: var(--r-heading-color); text-align: center; line-height: 1.2;">Routine kenniswerk verliest waarde</h3>
-              <ul style="font-size: 0.92em; line-height: 1.4; padding-left: 16px; margin: 0;">
-                <li style="margin-bottom: 6px;">Analyses, rapportages → geautomatiseerd</li>
+            <div class="box" style="margin: 0; padding: 12px 15px; font-size: 0.56em;">
+              <div style="font-size: 1.9em; text-align: center; margin-bottom: 6px;">⚠️</div>
+              <h3 style="font-size: 1.08em; margin-bottom: 8px; color: var(--r-heading-color); text-align: center; line-height: 1.15;">Routine kenniswerk verliest waarde</h3>
+              <ul style="font-size: 0.9em; line-height: 1.3; padding-left: 16px; margin: 0;">
+                <li style="margin-bottom: 5px;">Analyses, rapportages → geautomatiseerd</li>
                 <li>Waarde: "SWOT toepassen" → "nieuw framework bedenken"</li>
               </ul>
             </div>
 
-            <div class="box" style="margin: 0; padding: 15px 18px; font-size: 0.58em;">
-              <div style="font-size: 2em; text-align: center; margin-bottom: 8px;">🎯</div>
-              <h3 style="font-size: 1.1em; margin-bottom: 10px; color: var(--r-heading-color); text-align: center; line-height: 1.2;">Focus op 'Human Skills' aan de rand</h3>
-              <ul style="font-size: 0.92em; line-height: 1.4; padding-left: 16px; margin: 0;">
-                <li style="margin-bottom: 6px;">Creativiteit in onbekend terrein</li>
-                <li style="margin-bottom: 6px;">Strategie zonder precedent</li>
+            <div class="box" style="margin: 0; padding: 12px 15px; font-size: 0.56em;">
+              <div style="font-size: 1.9em; text-align: center; margin-bottom: 6px;">🎯</div>
+              <h3 style="font-size: 1.08em; margin-bottom: 8px; color: var(--r-heading-color); text-align: center; line-height: 1.15;">Focus op 'Human Skills' aan de rand</h3>
+              <ul style="font-size: 0.9em; line-height: 1.3; padding-left: 16px; margin: 0;">
+                <li style="margin-bottom: 5px;">Creativiteit in onbekend terrein</li>
+                <li style="margin-bottom: 5px;">Strategie zonder precedent</li>
                 <li>Nieuwe vragen stellen</li>
               </ul>
             </div>
@@ -911,26 +911,26 @@
           </div>
 
           <!-- Nuancering -->
-          <div class="fragment" style="margin-top: 15px;">
-            <div class="box" style="background: rgba(76, 175, 80, 0.08); border: 2px solid #4caf50; padding: 15px 20px; max-width: 88%; margin: 0 auto; font-size: 0.6em;">
-              <h3 style="font-size: 1.05em; margin-bottom: 8px; color: #2e7d32; text-align: center;">⚖️ Belangrijke nuancering van de onderzoekers</h3>
-              <p style="margin-bottom: 8px; line-height: 1.4;">
+          <div class="fragment" style="margin-top: 10px;">
+            <div class="box" style="background: rgba(76, 175, 80, 0.08); border: 2px solid #4caf50; padding: 12px 16px; max-width: 88%; margin: 0 auto; font-size: 0.57em;">
+              <h3 style="font-size: 1.02em; margin-bottom: 6px; color: #2e7d32; text-align: center;">⚖️ Belangrijke nuancering van de onderzoekers</h3>
+              <p style="margin-bottom: 6px; line-height: 1.3;">
                 Dit model: AI als <strong>vervanging</strong>. Maar AI kan ook <strong>tool</strong> zijn (complementariteit):
               </p>
-              <ul style="line-height: 1.4; padding-left: 20px; margin-bottom: 8px;">
-                <li style="margin-bottom: 5px;">Routinewerker + AI = kan moeilijker werk aan</li>
+              <ul style="line-height: 1.3; padding-left: 20px; margin-bottom: 6px;">
+                <li style="margin-bottom: 4px;">Routinewerker + AI = kan moeilijker werk aan</li>
                 <li>Genius + AI = kan sneller/verder innoveren</li>
               </ul>
-              <p style="font-weight: 600; text-align: center; color: #1b5e20; line-height: 1.3; font-size: 1.05em;">
+              <p style="font-weight: 600; text-align: center; color: #1b5e20; line-height: 1.25; font-size: 1.02em;">
                 De realiteit zal waarschijnlijk tussen beide in liggen.
               </p>
             </div>
           </div>
 
           <!-- Call to action -->
-          <div class="fragment" style="margin-top: 12px;">
-            <div class="box" style="background: rgba(8, 61, 119, 0.05); padding: 12px; max-width: 80%; margin: 0 auto; border-left: 4px solid var(--r-heading-color);">
-              <p style="font-size: 0.65em; font-weight: 600; text-align: center; color: var(--r-heading-color); line-height: 1.4;">
+          <div class="fragment" style="margin-top: 8px;">
+            <div class="box" style="background: rgba(8, 61, 119, 0.05); padding: 10px; max-width: 80%; margin: 0 auto; border-left: 4px solid var(--r-heading-color);">
+              <p style="font-size: 0.62em; font-weight: 600; text-align: center; color: var(--r-heading-color); line-height: 1.35;">
                 Over 4 jaar: ben je een routinewerker die verdrongen wordt,<br/>
                 of train je nu al voor Region 1/3 genius work?
               </p>
@@ -1333,7 +1333,7 @@
           <div style="color: white; text-align: center;">
             <h1 style="font-size: 3em; margin-bottom: 30px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.4);">☕ PAUZE</h1>
             <p style="font-size: 1.5em; margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">15 minuten</p>
-            <p style="font-size: 1em; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">We starten om [TIJD] met Blok 3: Transformatie</p>
+            <p style="font-size: 1em; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">We starten om <span id="block3-start-time">[TIJD]</span> met Blok 3: Transformatie</p>
           </div>
           <aside class="notes">
             15 minuten pauze na Blok 2 (Inzicht). Studenten hebben nu:
@@ -1571,6 +1571,36 @@
         center: true,
         transition: "fade",
         plugins: [RevealNotes],
+      });
+
+      // Update pause slide times dynamically
+      function updatePauseTime(elementId, durationMinutes) {
+        const now = new Date();
+        const startTime = new Date(now.getTime() + durationMinutes * 60000);
+        const hours = String(startTime.getHours()).padStart(2, '0');
+        const minutes = String(startTime.getMinutes()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}`;
+
+        const timeElement = document.getElementById(elementId);
+        if (timeElement) {
+          timeElement.textContent = timeString;
+        }
+      }
+
+      // Update times when slide is loaded and when pause slides are shown
+      document.addEventListener('DOMContentLoaded', () => {
+        updatePauseTime('block2-start-time', 10);
+        updatePauseTime('block3-start-time', 15);
+      });
+
+      Reveal.on('slidechanged', (event) => {
+        // Update time whenever we navigate to a pause slide
+        const slideText = event.currentSlide.textContent;
+        if (slideText.includes('PAUZE') && slideText.includes('Blok 2: Inzicht')) {
+          updatePauseTime('block2-start-time', 10);
+        } else if (slideText.includes('PAUZE') && slideText.includes('Blok 3: Transformatie')) {
+          updatePauseTime('block3-start-time', 15);
+        }
       });
 
       // Check if docent mode is enabled via query parameter
